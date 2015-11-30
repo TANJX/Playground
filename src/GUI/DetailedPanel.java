@@ -24,6 +24,7 @@ public class DetailedPanel extends JPanel {
 		// JButton jbt = new JButton("ok");
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
+		jsh.setSize(100, 200);
 		add(jlh);
 		add(jsh);
 		add(jlat);

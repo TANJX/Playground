@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
 		c.add(jbt, BorderLayout.SOUTH);
 		c.add(textfield, BorderLayout.NORTH);
 		c.add(detailsPanel, BorderLayout.CENTER);
-		setSize(500, 200);
+		setSize(450, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		

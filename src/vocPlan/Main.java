@@ -89,6 +89,12 @@ public class Main {
 
 			int day = 1, listProgress = 0;
 			while (status2(list)) {
+				if ((cal.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR)
+						&& cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)
+						&& cal.get(Calendar.DATE) == Calendar.getInstance().get(Calendar.DATE)))
+					System.out.print("**Today: ");
+				else
+					System.out.print("\t");
 				System.out.print(fullDateFormat.format(cal.getTime()) + ": \t");
 				if (!ifWeekend(y, m, d, day) && listProgress < listNum) {
 					listProgress++;
