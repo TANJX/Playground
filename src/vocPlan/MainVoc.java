@@ -2,6 +2,7 @@ package vocPlan;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,8 @@ import java.util.Locale;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class MainVoc {
 	static Locale locale = new Locale("en", "US");
@@ -33,11 +36,19 @@ public class MainVoc {
 	static JSpinner slist = new JSpinner();
 	static JScrollPane scroll = new JScrollPane(panel1, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 			JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	static JLabel label3 = new JLabel("New list on: ");
+	static JCheckBox c1 = new JCheckBox("Monday");
+	static JCheckBox c2 = new JCheckBox("Tuesday");
+	static JCheckBox c3 = new JCheckBox("Wednesday");
+	static JCheckBox c4 = new JCheckBox("Thrusday");
+	static JCheckBox c5 = new JCheckBox("Friday");
+	static JCheckBox c6 = new JCheckBox("Saturday");
+	static JCheckBox c7 = new JCheckBox("Sunday");
 
 	public static void main(String[] args) throws ParseException {
 
-		frame.setSize(700, 150);
-
+		frame.setSize(700, 200);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Center on screen
 		Toolkit toolkit = frame.getToolkit();
 		Dimension size = toolkit.getScreenSize(); // resolution of the monitor
@@ -76,6 +87,34 @@ public class MainVoc {
 		slist.setValue(10);
 		panel1.add(slist);
 
+		label3.setBounds(30, 80, 150, 30);
+		panel1.add(label3);
+
+		c1.setBounds(40, 100, 80, 30);
+		c1.setSelected(true);
+		panel1.add(c1);
+
+		c2.setBounds(120, 100, 80, 30);
+		c2.setSelected(true);
+		panel1.add(c2);
+
+		c3.setBounds(200, 100, 100, 30);
+		c3.setSelected(true);
+		panel1.add(c3);
+
+		c4.setBounds(300, 100, 80, 30);
+		c4.setSelected(true);
+		panel1.add(c4);
+
+		c5.setBounds(380, 100, 80, 30);
+		c5.setSelected(true);
+		panel1.add(c5);
+
+		c6.setBounds(460, 100, 80, 30);
+		panel1.add(c6);
+
+		c7.setBounds(540, 100, 80, 30);
+		panel1.add(c7);
 		//
 		frame.add(panel1, BorderLayout.CENTER);
 		JButton button = new JButton("Done!");
@@ -83,25 +122,75 @@ public class MainVoc {
 		panel1.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame listFrame = new JFrame("Plan");
-				JTextArea textArea = new JTextArea();
-				listFrame.setSize(500, 700);
-				System.out.println("Button clicked");
-				try {
-					textArea.setText(result((int) sy.getValue(), (int) sm.getValue(), (int) sd.getValue(),
-							(int) slist.getValue()));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				JPanel contentPane=new JPanel();
-				contentPane.setBorder(new EmptyBorder(5,5,5,5));
-				contentPane.setLayout(new BorderLayout(0,0));
-				listFrame.setContentPane(contentPane);
-				JScrollPane scrollPane=new JScrollPane();
-				contentPane.add(scrollPane,BorderLayout.CENTER);
-				scrollPane.setViewportView(textArea);
-				//listFrame.add(textArea);
-				listFrame.setVisible(true);
+				if (c1.isSelected() || c2.isSelected() || c3.isSelected() || c4.isSelected() || c5.isSelected()
+						|| c6.isSelected() || c7.isSelected()) {
+					JFrame listFrame = new JFrame("Plan");
+					JTextArea textArea = new JTextArea();
+					textArea.setEditable(false);
+					listFrame.setSize(600, 700);
+					System.out.println("Button clicked");
+					try {
+						textArea.setText(result((int) sy.getValue(), (int) sm.getValue(), (int) sd.getValue(),
+								(int) slist.getValue()));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					JPanel contentPane = new JPanel();
+					contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+					contentPane.setLayout(new BorderLayout(0, 0));
+					listFrame.setContentPane(contentPane);
+					JScrollPane scrollPane = new JScrollPane();
+					contentPane.add(scrollPane, BorderLayout.CENTER);
+					scrollPane.setViewportView(textArea);
+
+					JButton export = new JButton("Export to Excel Format");
+					JPanel buttonPane = new JPanel();
+					buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+					buttonPane.add(export);
+					listFrame.add(buttonPane, BorderLayout.SOUTH);
+
+					listFrame.setLocation(size.width / 2 - frame.getWidth() / 2,
+							size.height / 2 - frame.getHeight() / 2 - 300);
+					listFrame.setVisible(true);
+				} else
+					JOptionPane.showMessageDialog(frame, "You have to select at least one day to get your new list! ");
+			}
+		});
+
+		sy.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int temp = (int) sy.getValue();
+				if (temp <= 2014)
+					sy.setValue(2014);
+			}
+		});
+		sm.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int temp = (int) sm.getValue();
+				if (temp <= 0)
+					sm.setValue(1);
+				else if (temp > 12)
+					sm.setValue(12);
+			}
+		});
+		sd.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int temp = (int) sd.getValue();
+				if (temp <= 0)
+					sd.setValue(1);
+				else if (temp > 31)
+					sd.setValue(31);
+			}
+		});
+		slist.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int temp = (int) slist.getValue();
+				if (temp <= 0)
+					slist.setValue(1);
 			}
 		});
 
@@ -131,8 +220,8 @@ public class MainVoc {
 				result.append("**Today: ");
 			else
 				result.append("\t");
-			result.append(fullDateFormat.format(cal.getTime()) + ": \t");
-			if (!ifWeekend(y, m, d, day) && listProgress < listNum) {
+			result.append(fullDateFormat.format(cal.getTime()) + ": \t\t");
+			if (ifNewList(y, m, d, day) && listProgress < listNum) {
 				listProgress++;
 				list[listProgress][0] = day;
 				result.append("(new!)" + listProgress + ", ");
@@ -169,12 +258,30 @@ public class MainVoc {
 		return false;
 	}
 
-	public static boolean ifWeekend(int y, int m, int d, int day) throws ParseException {
+	public static boolean ifNewList(int y, int m, int d, int day) throws ParseException {
 		String date = y + "-" + m + "-" + (d + day - 1);
 		Date bdate = format1.parse(date);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(bdate);
-		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY && c1.isSelected()) {
+			return true;
+		}
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY && c2.isSelected()) {
+			return true;
+		}
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY && c3.isSelected()) {
+			return true;
+		}
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY && c4.isSelected()) {
+			return true;
+		}
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY && c5.isSelected()) {
+			return true;
+		}
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY && c6.isSelected()) {
+			return true;
+		}
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY && c7.isSelected()) {
 			return true;
 		}
 		return false;
