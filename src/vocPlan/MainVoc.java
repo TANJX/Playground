@@ -6,13 +6,17 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
+import java.net.URLDecoder;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
@@ -131,7 +135,7 @@ public class MainVoc {
 					System.out.println("Button clicked");
 					try {
 						textArea.setText(result((int) sy.getValue(), (int) sm.getValue(), (int) sd.getValue(),
-								(int) slist.getValue()));
+								(int) slist.getValue(), 0));
 					} catch (ParseException e) {
 						e.printStackTrace();
 					}
@@ -144,6 +148,24 @@ public class MainVoc {
 					scrollPane.setViewportView(textArea);
 
 					JButton export = new JButton("Export to Excel Format");
+					export.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							try {
+								String Filename = (int) slist.getValue() + "-lists " + (int) sy.getValue() + "-"
+										+ (int) sm.getValue() + "-" + (int) sd.getValue() + ".csv";
+								write(getPath(), Filename, result((int) sy.getValue(), (int) sm.getValue(),
+										(int) sd.getValue(), (int) slist.getValue(), 1));
+								JOptionPane.showMessageDialog(listFrame,
+										"Success! \nFileName: " + Filename + "\nPath: " + getPath());
+							} catch (ParseException e) {
+								e.printStackTrace();
+								JOptionPane.showMessageDialog(listFrame, "Error! ParseException");
+							} catch (UnsupportedEncodingException e) {
+								e.printStackTrace();
+								JOptionPane.showMessageDialog(listFrame, "Error! UnsupportedEncodingException");
+							}
+						}
+					});
 					JPanel buttonPane = new JPanel();
 					buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 					buttonPane.add(export);
@@ -158,6 +180,7 @@ public class MainVoc {
 		});
 
 		sy.addChangeListener(new ChangeListener() {
+
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				int temp = (int) sy.getValue();
@@ -198,15 +221,16 @@ public class MainVoc {
 
 	}
 
-	public static String result(int y, int m, int d, int listNum) throws ParseException {
+	public static String result(int y, int m, int d, int listNum, int mode) throws ParseException {
 		StringBuffer result = new StringBuffer("");
+		StringBuffer excelResult = new StringBuffer("Date,New list,Review->\n");
 		int[][] list = new int[listNum + 1][2];//
 		for (int i = 1; i <= listNum; i++) {
 			list[i][1] = 0;
 			list[i][0] = 0;
 		}
 
-		result.append("Here is your voc plan:\n" + "\n");
+		result.append("Here is your Vocabulary PLAN:\n" + "\n");
 		Date bdate;
 		bdate = format1.parse(y + "-" + m + "-" + d);
 		Calendar cal = Calendar.getInstance();
@@ -221,25 +245,35 @@ public class MainVoc {
 			else
 				result.append("\t");
 			result.append(fullDateFormat.format(cal.getTime()) + ": \t\t");
+			excelResult.append(format1.format(cal.getTime()) + ",");
 			if (ifNewList(y, m, d, day) && listProgress < listNum) {
 				listProgress++;
 				list[listProgress][0] = day;
 				result.append("(new!)" + listProgress + ", ");
-			}
+				excelResult.append(listProgress + ",");
+			} else
+				excelResult.append(",");
 
 			for (int i = 1; i <= listNum; i++) {
 				if (list[i][0] != 0 && (day - list[i][0] == 1 || day - list[i][0] == 2 || day - list[i][0] == 4
 						|| day - list[i][0] == 7 || day - list[i][0] == 14)) {
 					result.append(i + ", ");
+					excelResult.append(i + ",");
 					list[i][1]++;
 				}
 			}
 			result.append("\n");
+			excelResult.append("\n");
 			cal.add(Calendar.DAY_OF_MONTH, 1);
 			day++;
 		}
 		result.append("Days: " + day + "\n");
-		return result.toString();
+		if (mode == 0)
+			return result.toString();
+		else if (mode == 1)
+			return excelResult.toString();
+		else
+			return "";
 	}
 
 	static boolean status1(int[] list) {
@@ -287,4 +321,43 @@ public class MainVoc {
 		return false;
 	}
 
+	public static void write(String address, String fileName, String text) {
+
+		File file = new File(address + fileName);
+		try (FileOutputStream fop = new FileOutputStream(file)) {
+
+			// if file doesn't exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			// get the content in bytes
+			byte[] contentInBytes = text.getBytes();
+
+			fop.write(contentInBytes);
+			fop.flush();
+			fop.close();
+
+			System.out.println("Done");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	static String getPath() throws UnsupportedEncodingException {
+		StringBuffer path = new StringBuffer(System.getProperty("java.class.path") + "/");
+		for (int i = path.length() - 4; i > 0; i--) {
+			if (path.charAt(i) == '\\') {
+				path.delete(i, path.length() - 1);
+				break;
+			}
+		}
+		for (int i = 0; i < path.length(); i++) {
+			if (path.charAt(i) == '\\') {
+				path.setCharAt(i, '/');
+			}
+		}
+		return URLDecoder.decode(path.toString(), "UTF-8");
+	}
 }
