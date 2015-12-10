@@ -23,6 +23,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class MainVoc {
+	static final int[] repeatDay = { 1, 2, 4, 7, 14, 30 };
+	static final int repeatTimes = repeatDay.length;
 	static Locale locale = new Locale("en", "US");
 	static DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 	static DateFormat fullDateFormat = DateFormat.getDateInstance(DateFormat.FULL, locale);
@@ -224,7 +226,7 @@ public class MainVoc {
 	public static String result(int y, int m, int d, int listNum, int mode) throws ParseException {
 		StringBuffer result = new StringBuffer("");
 		StringBuffer excelResult = new StringBuffer("Date,New list,Review->\n");
-		int[][] list = new int[listNum + 1][2];//
+		int[][] list = new int[listNum + 1][2];
 		for (int i = 1; i <= listNum; i++) {
 			list[i][1] = 0;
 			list[i][0] = 0;
@@ -255,11 +257,15 @@ public class MainVoc {
 				excelResult.append(",");
 
 			for (int i = 1; i <= listNum; i++) {
-				if (list[i][0] != 0 && (day - list[i][0] == 1 || day - list[i][0] == 2 || day - list[i][0] == 4
-						|| day - list[i][0] == 7 || day - list[i][0] == 14)) {
-					result.append(i + ", ");
-					excelResult.append(i + ",");
-					list[i][1]++;
+				loop: {
+					if (list[i][0] != 0)
+						for (int o : repeatDay)
+							if (day - list[i][0] == o) {
+								result.append(i + ", ");
+								excelResult.append(i + ",");
+								list[i][1]++;
+								break loop;
+							}
 				}
 			}
 			result.append("\n");
@@ -278,7 +284,7 @@ public class MainVoc {
 
 	static boolean status1(int[] list) {
 		for (int i = 1; i < list.length; i++) {
-			if (list[i] != 5)
+			if (list[i] != repeatTimes)
 				return true;
 		}
 		return false;
@@ -286,7 +292,7 @@ public class MainVoc {
 
 	static boolean status2(int[][] list) {
 		for (int i = 1; i < list.length; i++) {
-			if (list[i][1] != 5)
+			if (list[i][1] != repeatTimes)
 				return true;
 		}
 		return false;
