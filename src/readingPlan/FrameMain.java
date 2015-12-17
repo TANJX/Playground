@@ -13,15 +13,17 @@ public class FrameMain extends JFrame {
 
 	public FrameMain(String title) {
 		super(title);
-		ToolBarAndMenu toolbarPane = new ToolBarAndMenu();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		ToolBarAndMenu toolbarPane = new ToolBarAndMenu();
 		setJMenuBar(toolbarPane.menuBar);
+		
 		getContentPane().add(toolbarPane.toolBar, BorderLayout.NORTH);
 
 		JPanel bigPanel = new JPanel();
 		add(bigPanel, BorderLayout.CENTER);
 		bigPanel.setLayout(new BoxLayout(bigPanel, BoxLayout.X_AXIS));
-
+		
 		JPanel leftPanel = new JPanel();
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 		leftPanel.add(Box.createVerticalStrut(10));
@@ -29,6 +31,7 @@ public class FrameMain extends JFrame {
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(new BorderLayout());
 		bigPanel.add(leftPanel);
+		bigPanel.add(Box.createHorizontalStrut(20));
 		bigPanel.add(rightPanel);
 		// leftPanel.setBounds(0, 0, 300, 200);
 		// rightPanel.setBounds(300, 200, 300, 200);
@@ -60,12 +63,12 @@ public class FrameMain extends JFrame {
 		
 		JList BooksList = new JList(bookList);
 		rightPanel.add(BooksList, BorderLayout.CENTER);
-		JPanel rightSouthPane = new JPanel();
+		JPanel rightSouthPanel = new JPanel();
 		JButton addButton = new JButton("Add");
-		rightSouthPane.add(addButton);
+		rightSouthPanel.add(addButton);
 		JButton removeButton = new JButton("Remove");
-		rightSouthPane.add(removeButton);
-		rightPanel.add(rightSouthPane, BorderLayout.SOUTH);
+		rightSouthPanel.add(removeButton);
+		rightPanel.add(rightSouthPanel, BorderLayout.SOUTH);
 		
 		
 		

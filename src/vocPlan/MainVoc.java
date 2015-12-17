@@ -23,7 +23,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class MainVoc {
-	static final int[] repeatDay = { 1, 2, 4, 7, 14, 30 };
+	static int[] repeatDay = { 1, 2, 4, 7, 14, 30 };
+	static String[] repeatDayString = { "1", "2", "4", "7", "14", "30","","","","" };
 	static final int repeatTimes = repeatDay.length;
 	static Locale locale = new Locale("en", "US");
 	static DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -50,6 +51,7 @@ public class MainVoc {
 	static JCheckBox c5 = new JCheckBox("Friday");
 	static JCheckBox c6 = new JCheckBox("Saturday");
 	static JCheckBox c7 = new JCheckBox("Sunday");
+	static JList repeatedList = new JList(repeatDayString);
 
 	public static void main(String[] args) throws ParseException {
 
