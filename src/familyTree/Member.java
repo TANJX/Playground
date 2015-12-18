@@ -21,9 +21,26 @@ public class Member {
 		this.Father = Father;
 	}
 
-	public void setSon(Member[] Son) {
-		this.Son = Son;
-	}
+	 /* Obsolete Method
+	 public void setSon(Member[] Son) {
+	     this.Son = Son;
+	 }
+	 */
+    
+    	public void addSon(Member Son) {
+	    if (this.Son == null) {
+	       this.Son = new Member[]{Son};
+	    } else {
+	      Member temp[] = this.Son;
+	      this.Son = new Member[temp.length + 1];
+	      int i = 0;
+	       for (Member o : temp) {
+	          this.Son[i] = o;
+	          i++;
+	       }
+	      this.Son[i] = Son;
+        	}
+	 }
 
 	public String toString() {
 		StringBuffer temp = new StringBuffer("My name is " + name);
