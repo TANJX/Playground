@@ -24,7 +24,7 @@ import javax.swing.event.ChangeListener;
 
 public class MainVoc {
 	static int[] repeatDay = { 1, 2, 4, 7, 14, 30 };
-	static String[] repeatDayString = { "1", "2", "4", "7", "14", "30","","","","" };
+	static String[] repeatDayString = { "1", "2", "4", "7", "14", "30", "", "", "", "" };
 	static final int repeatTimes = repeatDay.length;
 	static Locale locale = new Locale("en", "US");
 	static DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -52,6 +52,7 @@ public class MainVoc {
 	static JCheckBox c6 = new JCheckBox("Saturday");
 	static JCheckBox c7 = new JCheckBox("Sunday");
 	static JList repeatedList = new JList(repeatDayString);
+	static JFileChooser jFileChooser = new JFileChooser();
 
 	public static void main(String[] args) throws ParseException {
 
@@ -125,8 +126,8 @@ public class MainVoc {
 		panel1.add(c7);
 		//
 		frame.add(panel1, BorderLayout.CENTER);
-		JButton button = new JButton("Done!");
-		button.setBounds(580, 40, 70, 30);
+		JButton button = new JButton("Done...");
+		button.setBounds(580, 40, 80, 30);
 		panel1.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -151,24 +152,34 @@ public class MainVoc {
 					contentPane.add(scrollPane, BorderLayout.CENTER);
 					scrollPane.setViewportView(textArea);
 
-					JButton export = new JButton("Export to Excel Format");
+					JButton export = new JButton("Export to Excel Format...");
 					export.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
+							jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 							try {
-								String Filename = (int) slist.getValue() + "-lists " + (int) sy.getValue() + "-"
+								jFileChooser.setCurrentDirectory(new File(getPath()));
+							} catch (UnsupportedEncodingException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							int returnVal = jFileChooser.showOpenDialog(listFrame);
+							if (returnVal == JFileChooser.APPROVE_OPTION) {
+								File file = jFileChooser.getSelectedFile();
+								String filename = (int) slist.getValue() + "-lists " + (int) sy.getValue() + "-"
 										+ (int) sm.getValue() + "-" + (int) sd.getValue() + ".csv";
-								write(getPath(), Filename, result((int) sy.getValue(), (int) sm.getValue(),
-										(int) sd.getValue(), (int) slist.getValue(), 1));
-								JOptionPane.showMessageDialog(listFrame,
-										"Success! \nFileName: " + Filename + "\nPath: " + getPath());
-							} catch (ParseException e) {
-								e.printStackTrace();
-								JOptionPane.showMessageDialog(listFrame, "Error! ParseException");
-							} catch (UnsupportedEncodingException e) {
-								e.printStackTrace();
-								JOptionPane.showMessageDialog(listFrame, "Error! UnsupportedEncodingException");
+								String f = file.getAbsolutePath() + "\\" + filename;
+								try {
+									write(new File(f), result((int) sy.getValue(), (int) sm.getValue(),
+											(int) sd.getValue(), (int) slist.getValue(), 1));
+									JOptionPane.showMessageDialog(listFrame,
+											"Success! \nFileName: " + filename + "\nPath: " + file.getAbsolutePath());
+								} catch (ParseException e) {
+									e.printStackTrace();
+									JOptionPane.showMessageDialog(listFrame, "Error! ParseException");
+								}
 							}
 						}
+
 					});
 					JPanel buttonPane = new JPanel();
 					buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -225,7 +236,7 @@ public class MainVoc {
 
 	}
 
-	public static String result(int y, int m, int d, int listNum, int mode) throws ParseException {
+	private static String result(int y, int m, int d, int listNum, int mode) throws ParseException {
 		StringBuffer result = new StringBuffer("");
 		StringBuffer excelResult = new StringBuffer("Date,New list,Review->\n");
 		int[][] list = new int[listNum + 1][2];
@@ -241,7 +252,7 @@ public class MainVoc {
 		cal.setTime(bdate);
 
 		int day = 1, listProgress = 0;
-		while (status2(list)) {
+		while (status(list)) {
 			if ((cal.get(Calendar.YEAR) == Calendar.getInstance().get(Calendar.YEAR)
 					&& cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)
 					&& cal.get(Calendar.DATE) == Calendar.getInstance().get(Calendar.DATE)))
@@ -284,15 +295,7 @@ public class MainVoc {
 			return "";
 	}
 
-	static boolean status1(int[] list) {
-		for (int i = 1; i < list.length; i++) {
-			if (list[i] != repeatTimes)
-				return true;
-		}
-		return false;
-	}
-
-	static boolean status2(int[][] list) {
+	private static boolean status(int[][] list) {
 		for (int i = 1; i < list.length; i++) {
 			if (list[i][1] != repeatTimes)
 				return true;
@@ -300,7 +303,7 @@ public class MainVoc {
 		return false;
 	}
 
-	public static boolean ifNewList(int y, int m, int d, int day) throws ParseException {
+	private static boolean ifNewList(int y, int m, int d, int day) throws ParseException {
 		String date = y + "-" + m + "-" + (d + day - 1);
 		Date bdate = format1.parse(date);
 		Calendar cal = Calendar.getInstance();
@@ -329,31 +332,26 @@ public class MainVoc {
 		return false;
 	}
 
-	public static void write(String address, String fileName, String text) {
-
-		File file = new File(address + fileName);
+	private static void write(File file, String text) {
+		// String address, String fileName, String text
+		// File file = new File(address + fileName);
 		try (FileOutputStream fop = new FileOutputStream(file)) {
-
 			// if file doesn't exists, then create it
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-
 			// get the content in bytes
 			byte[] contentInBytes = text.getBytes();
-
 			fop.write(contentInBytes);
 			fop.flush();
 			fop.close();
-
 			System.out.println("Done");
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	static String getPath() throws UnsupportedEncodingException {
+	private static String getPath() throws UnsupportedEncodingException {
 		StringBuffer path = new StringBuffer(System.getProperty("java.class.path") + "/");
 		for (int i = path.length() - 4; i > 0; i--) {
 			if (path.charAt(i) == '\\') {
