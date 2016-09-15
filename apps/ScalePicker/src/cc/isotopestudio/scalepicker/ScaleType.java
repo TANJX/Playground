@@ -1,4 +1,4 @@
-package app.scalePicker;
+package cc.isotopestudio.scalepicker;
 
 /**
  * Created by Mars on 7/15/2016.
