@@ -25,6 +25,8 @@ public class ScalePickerGUI {
     private JToolBar toolbar;
     private JButton infobtn;
     private JButton exitbtn;
+    private JButton button1;
+    private JButton button2;
 
     private static JFrame frame;
 

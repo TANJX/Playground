@@ -18,7 +18,7 @@
           <text value="SCALE PICKER"/>
         </properties>
       </component>
-      <grid id="3e58e" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
+      <grid id="3e58e" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="0" vgap="0">
         <margin top="20" left="50" bottom="20" right="50"/>
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -116,7 +116,7 @@
           </component>
           <component id="f6f4d" class="javax.swing.JSlider" binding="numSlider">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <majorTickSpacing value="1"/>
@@ -131,7 +131,7 @@
           </component>
           <scrollpane id="944f2" binding="listScroll">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="0" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
@@ -148,7 +148,7 @@
           </scrollpane>
           <component id="405bf" class="javax.swing.JButton" binding="generateAllButton" default-binding="true">
             <constraints>
-              <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="200" height="40"/>
                 <maximum-size width="200" height="40"/>
               </grid>
@@ -156,6 +156,22 @@
             <properties>
               <text value="Generate All"/>
               <toolTipText value="Get all scales"/>
+            </properties>
+          </component>
+          <component id="3d0a0" class="javax.swing.JButton" binding="button1" default-binding="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Button"/>
+            </properties>
+          </component>
+          <component id="334b5" class="javax.swing.JButton" binding="button2" default-binding="true">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Button"/>
             </properties>
           </component>
         </children>
