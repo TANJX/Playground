@@ -62,7 +62,7 @@ class ScaleResult {
         return null;
     }
 
-    private static final String[] mainKeys = {"C", "D", "B", "#F", "F", "♭E", "#G", "#C"};
+    private static final String[] mainKeys = {"C", "D", "B", "#F", "F", "bE", "#G", "#C"};
     private static final String[] keys = {"C", "#C", "D", "#D", "E", "F", "#F", "G", "#G", "A", "#A", "B"};
 
     private static String getRandomKey() {
@@ -81,9 +81,9 @@ class ScaleResult {
         String key = getRandomMainKey();
         if (form.equals("Major")) {
             if (key.equals("#G"))
-                return "♭A";
+                return "bA";
             if (key.equals("#C"))
-                return "♭D";
+                return "bD";
         }
         return key;
     }
@@ -123,7 +123,7 @@ class ScaleResult {
                         result += " C";
                         break;
                     case 1:
-                        result += " ♭B";
+                        result += " bB";
                         break;
                 }
                 break;

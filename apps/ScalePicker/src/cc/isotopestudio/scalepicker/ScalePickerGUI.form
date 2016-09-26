@@ -34,6 +34,7 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Consolas" size="18"/>
               <text value="Scales"/>
             </properties>
           </component>
@@ -45,6 +46,7 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Consolas" size="18"/>
               <text value="Scales a third apart"/>
             </properties>
           </component>
@@ -56,67 +58,13 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Consolas" size="18"/>
               <text value="Scales a sixth apart"/>
-            </properties>
-          </component>
-          <component id="74139" class="javax.swing.JButton" binding="legato3btn">
-            <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="250" height="30"/>
-                <preferred-size width="250" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Legato scales in thirds"/>
-            </properties>
-          </component>
-          <component id="541ab" class="javax.swing.JButton" binding="cs3abtn">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="250" height="30"/>
-                <preferred-size width="250" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Chromatic Scales a minor third apart"/>
-            </properties>
-          </component>
-          <component id="880ea" class="javax.swing.JButton" binding="cs3btn">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="250" height="30"/>
-                <preferred-size width="250" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Chromatic Scales in minor thirds"/>
-            </properties>
-          </component>
-          <component id="9a7df" class="javax.swing.JButton" binding="wholeTonebtn">
-            <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="250" height="30"/>
-                <preferred-size width="250" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Whole-tone scales"/>
-            </properties>
-          </component>
-          <component id="1a3fc" class="javax.swing.JButton" binding="arpeggiosbtn">
-            <constraints>
-              <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <minimum-size width="250" height="30"/>
-                <preferred-size width="250" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="Arpeggios"/>
             </properties>
           </component>
           <component id="f6f4d" class="javax.swing.JSlider" binding="numSlider">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <majorTickSpacing value="1"/>
@@ -139,39 +87,110 @@
               <component id="be95d" class="javax.swing.JList" binding="list1" default-binding="true">
                 <constraints/>
                 <properties>
+                  <font name="Consolas" size="24"/>
                   <model>
-                    <item value="NONE"/>
+                    <item value="Click to generate execise"/>
+                    <item value="---"/>
+                    <item value="ScalePicker 1.1.0"/>
+                    <item value="---"/>
+                    <item value="ISOTOPE Studio"/>
+                    <item value="Mars"/>
+                    <item value="Sept. 26, 2016"/>
                   </model>
                 </properties>
               </component>
             </children>
           </scrollpane>
-          <component id="405bf" class="javax.swing.JButton" binding="generateAllButton" default-binding="true">
+          <component id="74139" class="javax.swing.JButton" binding="legato3btn">
             <constraints>
-              <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="200" height="40"/>
-                <maximum-size width="200" height="40"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="30"/>
+                <preferred-size width="250" height="-1"/>
               </grid>
             </constraints>
             <properties>
-              <text value="Generate All"/>
-              <toolTipText value="Get all scales"/>
+              <font name="Consolas" size="18"/>
+              <text value="Legato scales in thirds"/>
+            </properties>
+          </component>
+          <component id="541ab" class="javax.swing.JButton" binding="cs3abtn">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="30"/>
+                <preferred-size width="250" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="18"/>
+              <text value="Chromatic Scales a minor third apart"/>
+            </properties>
+          </component>
+          <component id="880ea" class="javax.swing.JButton" binding="cs3btn">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="30"/>
+                <preferred-size width="250" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="18"/>
+              <text value="Chromatic Scales in minor thirds"/>
+            </properties>
+          </component>
+          <component id="9a7df" class="javax.swing.JButton" binding="wholeTonebtn">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="30"/>
+                <preferred-size width="250" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="18"/>
+              <text value="Whole-tone scales"/>
+            </properties>
+          </component>
+          <component id="1a3fc" class="javax.swing.JButton" binding="arpeggiosbtn">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <minimum-size width="250" height="30"/>
+                <preferred-size width="250" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font name="Consolas" size="18"/>
+              <text value="Arpeggios"/>
             </properties>
           </component>
           <component id="3d0a0" class="javax.swing.JButton" binding="button1" default-binding="true">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Consolas" size="18"/>
               <text value="Button"/>
             </properties>
           </component>
           <component id="334b5" class="javax.swing.JButton" binding="button2" default-binding="true">
             <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Consolas" size="18"/>
               <text value="Button"/>
+            </properties>
+          </component>
+          <component id="405bf" class="javax.swing.JButton" binding="generateAllButton" default-binding="true">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="200" height="40"/>
+                <maximum-size width="200" height="40"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-10574081"/>
+              <foreground color="-1"/>
+              <text value="Generate All"/>
+              <toolTipText value="Get all scales"/>
             </properties>
           </component>
         </children>

@@ -31,11 +31,11 @@ public class ScalePickerGUI {
     private static JFrame frame;
 
     public static void main(String[] args) {
-        frame = new JFrame("ScalePickerGUI 1.0.0");
+        frame = new JFrame("ScalePickerGUI 1.1.0");
         frame.setContentPane(new ScalePickerGUI().MainPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setMinimumSize(new Dimension(1000, 500));
+        frame.setMinimumSize(new Dimension(1300, 700));
         frame.setVisible(true);
     }
 
@@ -52,79 +52,76 @@ public class ScalePickerGUI {
         listModel = new DefaultListModel<>();
         list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list1.setModel(listModel);
-
-        JScrollBar sBar = listScroll.getVerticalScrollBar();
-
         scale1btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++) {
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE1)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE1)));
                 }
-                sBar.setValue(sBar.getMaximum());
+                addLine("-----------");
             }
         });
         scales3btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++) {
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE3)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE3)));
                 }
-                sBar.setValue(sBar.getMaximum());
+                addLine("-----------");
             }
         });
         scales6btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++) {
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE6)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE6)));
                 }
-                sBar.setValue(sBar.getMaximum());
+                addLine("-----------");
             }
         });
         legato3btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++) {
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.SCALEIN3)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.SCALEIN3)));
                 }
-                sBar.setValue(sBar.getMaximum());
+                addLine("-----------");
             }
         });
         cs3abtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++) {
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.CHROMATICSCALESAPART)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.CHROMATICSCALESAPART)));
                 }
-                sBar.setValue(sBar.getMaximum());
+                addLine("-----------");
             }
         });
         cs3btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++) {
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.CHROMATICSCALES)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.CHROMATICSCALES)));
                 }
-                sBar.setValue(sBar.getMaximum());
+                addLine("-----------");
             }
         });
         wholeTonebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++) {
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.WHOLETONE)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.WHOLETONE)));
                 }
-                sBar.setValue(sBar.getMaximum());
+                addLine("-----------");
             }
         });
         arpeggiosbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++) {
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.ARPEGGIOS)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.ARPEGGIOS)));
                 }
-                sBar.setValue(sBar.getMaximum());
+                addLine("-----------");
             }
         });
 
@@ -133,22 +130,26 @@ public class ScalePickerGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < numSlider.getValue(); i++)
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE1)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE1)));
                 for (int i = 0; i < numSlider.getValue(); i++)
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE3)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE3)));
                 for (int i = 0; i < numSlider.getValue(); i++)
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE6)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.SCALE6)));
                 for (int i = 0; i < numSlider.getValue(); i++)
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.SCALEIN3)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.SCALEIN3)));
                 for (int i = 0; i < numSlider.getValue(); i++)
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.CHROMATICSCALESAPART)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.CHROMATICSCALESAPART)));
                 for (int i = 0; i < numSlider.getValue(); i++)
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.CHROMATICSCALES)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.CHROMATICSCALES)));
                 for (int i = 0; i < numSlider.getValue(); i++)
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.WHOLETONE)));
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.WHOLETONE)));
                 for (int i = 0; i < numSlider.getValue(); i++)
-                    listModel.addElement((++count + ": " + ScaleResult.genRandom(ScaleType.ARPEGGIOS)));
-                sBar.setValue(sBar.getMaximum());
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.ARPEGGIOS)));
+                try {
+                    Thread.sleep(100L);
+                } catch (InterruptedException e1) {
+                }
+                addLine("-----------");
             }
         });
         infobtn.addActionListener(new ActionListener() {
@@ -167,6 +168,13 @@ public class ScalePickerGUI {
                 System.exit(0);
             }
         });
+    }
+
+    private void addLine(String line) {
+        listModel.addElement(line);
+        listScroll.getViewport().doLayout();
+        JScrollBar bar = listScroll.getVerticalScrollBar();
+        bar.setValue(bar.getMaximum());
     }
 
 }
