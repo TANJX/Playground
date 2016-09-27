@@ -3,6 +3,8 @@ package cc.isotopestudio.datecalculator;/*
  * Copyright ISOTOPE Studio
  */
 
+import cc.isotopestudio.datecalculator.xml.XMLImpl;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -47,6 +49,11 @@ public class DateGUI {
     boolean ifP1 = true;
 
     public DateGUI() {
+        XMLImpl dd = new XMLImpl();
+        String str = "C:\\Onedrive\\Coding\\Workspace\\Playground\\apps\\DateCalculator\\src\\cc\\isotopestudio\\datecalculator\\data.xml";
+        dd.init();
+        dd.createXML(str);
+
         final boolean[] ifP1 = {true};
         panel2.setVisible(false);
         GregorianCalendar g = new GregorianCalendar();
@@ -122,6 +129,7 @@ public class DateGUI {
         switchbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dd.addRecord("Test", new ISODate((int) aYearS.getValue(), (int) aDayS.getValue(), (int) aMonS.getValue()));
                 int m = (int) aMonS.getValue();
                 int d = (int) aDayS.getValue();
                 int y = (int) aYearS.getValue();
