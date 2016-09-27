@@ -1,15 +1,16 @@
-package cc.isotopestudio.datecalculator;/*
+package cc.isotopestudio.datecalculator;
+/*
  * Created by Mars on 9/26/2016.
  * Copyright ISOTOPE Studio
  */
 
-public class DateCal {
+class DateCal {
 
     private static boolean ifYear(int a) {
         return a % 100 == 0 ? a % 400 == 0 : a % 4 == 0;
     }
 
-    public static int getMonthDays(int year, int a) {
+    static int getMonthDays(int year, int a) {
         if (a == 2) {
             return ifYear(year) ? 29 : 28;
         } else if (a <= 7 && a > 0) {
@@ -20,7 +21,7 @@ public class DateCal {
             return 0;
     }
 
-    public static boolean ifLarger(int aYear, int aMonth, int aDay, int bYear, int bMonth, int bDay) {
+    static boolean ifLarger(int aYear, int aMonth, int aDay, int bYear, int bMonth, int bDay) {
         if (bYear > aYear)
             return true;
         if (aYear > bYear)
@@ -40,7 +41,7 @@ public class DateCal {
 
     }
 
-    public static long cal(int aYear, int aMonth, int aDay, int bYear, int bMonth, int bDay) {
+    static long cal(int aYear, int aMonth, int aDay, int bYear, int bMonth, int bDay) {
 
         long resultD = 0;
 
@@ -80,5 +81,15 @@ public class DateCal {
         }
 
         return resultD;
+    }
+
+    static ISODate addDate(ISODate date, int days) {
+        if (days >= 0)
+            for (int i = 0; i < days; i++)
+                date.addDay();
+        else
+            for (int i = 0; i > days; i--)
+                date.subtractDay();
+        return date;
     }
 }

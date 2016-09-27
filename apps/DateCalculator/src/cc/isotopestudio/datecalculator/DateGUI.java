@@ -20,15 +20,23 @@ public class DateGUI {
     private JSpinner bMonS;
     private JSpinner bDayS;
     private JSpinner bYearS;
-    private JTextField resultBox;
+    private JTextField resultBoxP1;
     private JButton infobtn;
     private JButton exitbtn;
     private JPanel panel;
+    private JButton switchbtn;
+    private JButton modeButton;
+    private JPanel panel2;
+    private JSpinner cMonS;
+    private JSpinner cDayS;
+    private JSpinner cYearS;
+    private JSpinner dDayS;
+    private JTextField resultBoxP2;
 
     private static JFrame frame;
 
     public static void main(String[] args) {
-        frame = new JFrame("DateGUI");
+        frame = new JFrame("Date Calculator 1.1.0");
         frame.setContentPane(new DateGUI().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -36,7 +44,11 @@ public class DateGUI {
         frame.setVisible(true);
     }
 
+    boolean ifP1 = true;
+
     public DateGUI() {
+        final boolean[] ifP1 = {true};
+        panel2.setVisible(false);
         GregorianCalendar g = new GregorianCalendar();
         aYearS.setValue(g.get(Calendar.YEAR));
         aMonS.setValue(g.get(Calendar.MONTH) + 1);
@@ -44,12 +56,16 @@ public class DateGUI {
         bYearS.setValue(g.get(Calendar.YEAR) + 1);
         bMonS.setValue(g.get(Calendar.MONTH) + 1);
         bDayS.setValue(g.get(Calendar.DATE));
-        update();
+        cYearS.setValue(g.get(Calendar.YEAR) + 1);
+        cMonS.setValue(g.get(Calendar.MONTH) + 1);
+        cDayS.setValue(g.get(Calendar.DATE));
+        updateP1();
+        updateP2();
         infobtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(frame, "Date Calculator 1.0.0\nISOTOPE Studio, Mars\n2016.9.26",
+                JOptionPane.showMessageDialog(frame, "Date Calculator 1.1.0\nISOTOPE Studio, Mars\n2016.9.26",
                         "Info",
                         JOptionPane.INFORMATION_MESSAGE);
             }
@@ -103,6 +119,57 @@ public class DateGUI {
                 vaildateB();
             }
         });
+        switchbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int m = (int) aMonS.getValue();
+                int d = (int) aDayS.getValue();
+                int y = (int) aYearS.getValue();
+                aMonS.setValue(bMonS.getValue());
+                aYearS.setValue(bYearS.getValue());
+                aDayS.setValue(bDayS.getValue());
+                bMonS.setValue(m);
+                bYearS.setValue(y);
+                bDayS.setValue(d);
+            }
+        });
+        modeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ifP1[0]) {
+                    panel2.setVisible(true);
+                    panel1.setVisible(false);
+                } else {
+                    panel1.setVisible(true);
+                    panel2.setVisible(false);
+                }
+                ifP1[0] = !ifP1[0];
+            }
+        });
+        cMonS.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                validateC();
+            }
+        });
+        cDayS.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                validateC();
+            }
+        });
+        cYearS.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                validateC();
+            }
+        });
+        dDayS.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                validateC();
+            }
+        });
     }
 
     private void vaildateA() {
@@ -123,7 +190,7 @@ public class DateGUI {
             aDayS.setValue(1);
         else if (temp > DateCal.getMonthDays((int) aYearS.getValue(), (int) aMonS.getValue()))
             aDayS.setValue(DateCal.getMonthDays((int) aYearS.getValue(), (int) aMonS.getValue()));
-        update();
+        updateP1();
     }
 
     private void vaildateB() {
@@ -144,15 +211,52 @@ public class DateGUI {
             bDayS.setValue(1);
         else if (temp > DateCal.getMonthDays((int) bYearS.getValue(), (int) bMonS.getValue()))
             bDayS.setValue(DateCal.getMonthDays((int) bYearS.getValue(), (int) bMonS.getValue()));
-        update();
+        updateP1();
     }
 
-    private void update() {
+    public void validateC() {
+        int temp = (int) cYearS.getValue();
+        if (temp <= 0)
+            cYearS.setValue(1);
+        else if (temp > 2500)
+            cYearS.setValue(2500);
+
+        temp = (int) cMonS.getValue();
+        if (temp <= 0)
+            cMonS.setValue(1);
+        else if (temp > 12)
+            cMonS.setValue(12);
+
+        temp = (int) cDayS.getValue();
+        if (temp <= 0)
+            cDayS.setValue(1);
+        else if (temp > DateCal.getMonthDays((int) cYearS.getValue(), (int) cMonS.getValue()))
+            cDayS.setValue(DateCal.getMonthDays((int) cYearS.getValue(), (int) cMonS.getValue()));
+
+        if ((int) dDayS.getValue() > 100000)
+            dDayS.setValue(100000);
+        else if ((int) dDayS.getValue() < -100000)
+            dDayS.setValue(-100000);
+
+        updateP2();
+    }
+
+
+    private void updateP1() {
         if (DateCal.ifLarger((int) aYearS.getValue(), (int) aMonS.getValue(), (int) aDayS.getValue(),
                 (int) bYearS.getValue(), (int) bMonS.getValue(), (int) bDayS.getValue()))
-            resultBox.setText("" + DateCal.cal((int) aYearS.getValue(), (int) aMonS.getValue(), (int) aDayS.getValue(),
+            resultBoxP1.setText("" + DateCal.cal((int) aYearS.getValue(), (int) aMonS.getValue(), (int) aDayS.getValue(),
                     (int) bYearS.getValue(), (int) bMonS.getValue(), (int) bDayS.getValue()));
         else
-            resultBox.setText("Error!");
+            resultBoxP1.setText("-" + DateCal.cal((int) bYearS.getValue(), (int) bMonS.getValue(), (int) bDayS.getValue(),
+                    (int) aYearS.getValue(), (int) aMonS.getValue(), (int) aDayS.getValue()));
     }
+
+    private void updateP2() {
+        ISODate date = DateCal.addDate(
+                new ISODate((int) cYearS.getValue(), (int) cMonS.getValue(), (int) cDayS.getValue()),
+                (int) dDayS.getValue());
+        resultBoxP2.setText(date.getYear() + "-" + date.getMonth() + "-" + date.getDay());
+    }
+
 }
