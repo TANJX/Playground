@@ -25,8 +25,9 @@ public class ScalePickerGUI {
     private JToolBar toolbar;
     private JButton infobtn;
     private JButton exitbtn;
-    private JButton button1;
-    private JButton button2;
+    private JButton dominantbtn;
+    private JButton diminishedbtn;
+    private JButton clearbtn;
 
     private static JFrame frame;
 
@@ -48,10 +49,9 @@ public class ScalePickerGUI {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
-        listModel = new DefaultListModel<>();
         list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list1.setModel(listModel);
+        createList();
+
         scale1btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,7 +124,24 @@ public class ScalePickerGUI {
                 addLine("-----------");
             }
         });
-
+        dominantbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < numSlider.getValue(); i++) {
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.DOMINANT)));
+                }
+                addLine("-----------");
+            }
+        });
+        diminishedbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < numSlider.getValue(); i++) {
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.DIMINISHED)));
+                }
+                addLine("-----------");
+            }
+        });
 
         generateAllButton.addActionListener(new ActionListener() {
             @Override
@@ -145,18 +162,23 @@ public class ScalePickerGUI {
                     addLine((++count + ": " + ScaleResult.genRandom(ScaleType.WHOLETONE)));
                 for (int i = 0; i < numSlider.getValue(); i++)
                     addLine((++count + ": " + ScaleResult.genRandom(ScaleType.ARPEGGIOS)));
+                for (int i = 0; i < numSlider.getValue(); i++)
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.DOMINANT)));
+                for (int i = 0; i < numSlider.getValue(); i++)
+                    addLine((++count + ": " + ScaleResult.genRandom(ScaleType.DIMINISHED)));
                 try {
                     Thread.sleep(100L);
-                } catch (InterruptedException e1) {
+                } catch (InterruptedException ignored) {
                 }
                 addLine("-----------");
             }
         });
+
         infobtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(frame, "ScalePickerGUI 1.0.0\nISOTOPE Studio, Mars\n2016.9.15",
+                JOptionPane.showMessageDialog(frame, "ScalePickerGUI 1.0.0\nISOTOPE Studio, Mars\n2016.9.29",
                         "Info",
                         JOptionPane.INFORMATION_MESSAGE);
             }
@@ -168,9 +190,35 @@ public class ScalePickerGUI {
                 System.exit(0);
             }
         });
+        clearbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                count = 0;
+                createList();
+            }
+        });
+    }
+
+    private boolean firstTime = true;
+
+    private void createList() {
+        firstTime = true;
+        listModel = new DefaultListModel<>();
+        list1.setModel(listModel);
+        listModel.addElement("Click to generate execise");
+        listModel.addElement("---");
+        listModel.addElement("ScalePicker 1.1.1");
+        listModel.addElement("---");
+        listModel.addElement("ISOTOPE Studio");
+        listModel.addElement("Mars");
+        listModel.addElement("Sept. 26, 2016");
     }
 
     private void addLine(String line) {
+        if (firstTime) {
+            listModel.clear();
+            firstTime = !firstTime;
+        }
         listModel.addElement(line);
         listScroll.getViewport().doLayout();
         JScrollBar bar = listScroll.getVerticalScrollBar();

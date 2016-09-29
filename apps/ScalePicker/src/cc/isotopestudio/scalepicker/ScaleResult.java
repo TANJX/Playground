@@ -103,17 +103,17 @@ class ScaleResult {
         switch (type) {
             case SCALE1:
                 result += type.getName() + " - " + getRandomPerform() + ", " + getRandomHand(1) + ", ";
-                String form = getRandomForm(0);
+                String form = getRandomForm(1);
                 result += " " + form + " " + getRandomMainKey(form);
                 break;
             case SCALE3:
                 result += type.getName() + " - " + getRandomPerform() + ", ";
-                form = getRandomForm(1);
+                form = getRandomForm(0);
                 result += " " + form + " " + getRandomMainKey(form);
                 break;
             case SCALE6:
                 result += type.getName() + " - " + getRandomPerform() + ", ";
-                form = getRandomForm(1);
+                form = getRandomForm(0);
                 result += " " + form + " " + getRandomMainKey(form);
                 break;
             case SCALEIN3:
@@ -141,6 +141,12 @@ class ScaleResult {
                 result += type.getName() + " - " + getRandomHand(1) + ", ";
                 form = getRandomForm(0);
                 result += " " + form + " " + getRandomMainKey(form) + ", beginning on " + getRandomPosition();
+                break;
+            case DOMINANT:
+                result += type.getName() + " - " + getRandomHand(1) + ", " + getRandomMainKey();
+                break;
+            case DIMINISHED:
+                result += type.getName() + " - " + getRandomHand(1) + ", beginning on " + getRandomKey();
                 break;
         }
         return result;

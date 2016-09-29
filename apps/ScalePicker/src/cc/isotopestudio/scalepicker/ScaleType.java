@@ -5,21 +5,21 @@ package cc.isotopestudio.scalepicker;
  * Copyright ISOTOPE Studio
  */
 enum ScaleType {
-    SCALE1("Scales", false),
-    SCALE3("Scales a third apart", false),
-    SCALE6("Scales a sixth apart", false),
-    SCALEIN3("Legato scales in thirds", true),
-    CHROMATICSCALESAPART("Chromatic Scales a minor third apart", true),
-    CHROMATICSCALES("Chromatic Scales in minor thirds", true),
-    WHOLETONE("Whole-tone scales", true),
-    ARPEGGIOS("Arpeggios", false);
+    SCALE1("Scales"),
+    SCALE3("Scales a third apart"),
+    SCALE6("Scales a sixth apart"),
+    SCALEIN3("Legato scales in thirds"),
+    CHROMATICSCALESAPART("Chromatic Scales a minor third apart"),
+    CHROMATICSCALES("Chromatic Scales in minor thirds"),
+    WHOLETONE("Whole-tone scales"),
+    ARPEGGIOS("Arpeggios"),
+    DOMINANT("Dominant sevenths"),
+    DIMINISHED("Diminished sevenths");
 
     final String name;
-    final boolean fixed;
 
-    ScaleType(String name, boolean fixed) {
+    ScaleType(String name) {
         this.name = name;
-        this.fixed = fixed;
     }
 
     public String getName() {

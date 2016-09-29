@@ -1,6 +1,7 @@
 package cc.isotopestudio.datecalculator.xml;
 
 import cc.isotopestudio.datecalculator.ISODate;
+import cc.isotopestudio.datecalculator.record.Record;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -12,68 +13,87 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class XMLImpl implements XMLInterface {
-    private Document document;
-    private String fileName;
+public class XMLImpl {
+    private static Document document;
+    private static String fileName;
 
-    public void init() {
+    static DocumentBuilder builder;
+    static DocumentBuilderFactory factory;
+
+    public static void init() {
         try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            this.document = builder.newDocument();
+            factory = DocumentBuilderFactory.newInstance();
+            builder = factory.newDocumentBuilder();
+            try {
+                document = builder.parse(new FileInputStream(new File("data.xml")));
+            } catch (SAXException | IOException e) {
+                e.printStackTrace();
+            }
+            root = document.getDocumentElement();
+            if (root == null || !root.getNodeName().equals("records")) {
+                createXML("data.yml");
+            }
+            save();
         } catch (ParserConfigurationException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private Element root;
+    private static Element root;
 
-    public void createXML(String fileName) {
-        this.fileName = fileName;
-        root = this.document.createElement("days");
-        this.document.appendChild(root);
+    public static void createXML(String fileName) {
+        XMLImpl.fileName = fileName;
+        root = document.createElement("records");
+        document.appendChild(root);
         save();
     }
 
-    public void save() {
-        TransformerFactory tf = TransformerFactory.newInstance();
-        try {
-            Transformer transformer = tf.newTransformer();
-            DOMSource source = new DOMSource(document);
-            transformer.setOutputProperty(OutputKeys.ENCODING, "gb2312");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
-            StreamResult result = new StreamResult(pw);
-            transformer.transform(source, result);
-            System.out.println("XML file updated!");
-        } catch (IllegalArgumentException | TransformerException | FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+    public static void save() {
+        writeXML(document, "data.xml");
     }
 
+    private static void writeXML(Document document, String filename) {
+        try {
+            builder = factory.newDocumentBuilder();
+            //Document document = builder.parse(new File("E:\\testFiles\\test.xml"));
+            document.normalize();
 
-    public void addRecord(String name, ISODate date) {
-        Element record = this.document.createElement("record");
-        Element nameE = this.document.createElement("name");
-        nameE.appendChild(this.document.createTextNode(name));
+            /** 将document中的内容写入文件中 */
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer transformer = tFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            //编码
+            DOMSource source = new DOMSource(document);
+            PrintWriter pw = new PrintWriter(new FileOutputStream(filename));
+            StreamResult result = new StreamResult(pw);
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void addRecord(String name, ISODate date) {
+        Element record = document.createElement("record");
+        Element nameE = document.createElement("name");
+        nameE.appendChild(document.createTextNode(name));
         record.appendChild(nameE);
-        Element year = this.document.createElement("year");
-        year.appendChild(this.document.createTextNode("" + date.getYear()));
+        Element year = document.createElement("year");
+        year.appendChild(document.createTextNode("" + date.getYear()));
         record.appendChild(year);
-        Element month = this.document.createElement("month");
-        month.appendChild(this.document.createTextNode("" + date.getMonth()));
+        Element month = document.createElement("month");
+        month.appendChild(document.createTextNode("" + date.getMonth()));
         record.appendChild(month);
-        Element day = this.document.createElement("day");
-        day.appendChild(this.document.createTextNode("" + date.getDay()));
+        Element day = document.createElement("day");
+        day.appendChild(document.createTextNode("" + date.getDay()));
         record.appendChild(day);
         root.appendChild(record);
         save();
@@ -84,16 +104,16 @@ public class XMLImpl implements XMLInterface {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(fileName);
-            NodeList employees = document.getChildNodes();
-            for (int i = 0; i < employees.getLength(); i++) {
-                Node employee = employees.item(i);
-                NodeList employeeInfo = employee.getChildNodes();
-                for (int j = 0; j < employeeInfo.getLength(); j++) {
-                    Node node = employeeInfo.item(j);
-                    NodeList employeeMeta = node.getChildNodes();
-                    for (int k = 0; k < employeeMeta.getLength(); k++) {
+            NodeList records = document.getChildNodes();
+            for (int i = 0; i < records.getLength(); i++) {
+                Node record = records.item(i);
+                NodeList recordInfo = record.getChildNodes();
+                for (int j = 0; j < recordInfo.getLength(); j++) {
+                    Node detail = recordInfo.item(j);
+                    NodeList detailInfo = detail.getChildNodes();
+                    for (int k = 0; k < detailInfo.getLength(); k++) {
                         System.out.println(
-                                employeeMeta.item(k).getNodeName() + ":" + employeeMeta.item(k).getTextContent());
+                                detailInfo.item(k).getNodeName() + ":" + detailInfo.item(k).getTextContent());
                     }
                 }
             }
@@ -101,5 +121,40 @@ public class XMLImpl implements XMLInterface {
         } catch (ParserConfigurationException | IOException | SAXException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static List<Record> getRecords() throws Exception {
+        List<Record> list = new ArrayList<>();
+//        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+//        DocumentBuilder builder = factory.newDocumentBuilder();
+//        Document document = builder.parse(new File("data.xml"));
+//        Element element = document.getDocumentElement();
+
+        NodeList records = document.getChildNodes();
+        for (int i = 0; i < records.getLength(); i++) {
+
+            Node record = records.item(i);
+            NodeList recordInfo = record.getChildNodes();
+            for (int j = 0; j < recordInfo.getLength(); j++) {
+                int year = 0, month = 0, day = 0;
+                String name = null;
+                Node detail = recordInfo.item(j);
+                NodeList detailInfo = detail.getChildNodes();
+                for (int k = 0; k < detailInfo.getLength(); k++) {
+                    if ("name".equals(detailInfo.item(k).getNodeName())) {
+                        name = detailInfo.item(k).getFirstChild().getNodeValue();
+                    } else if ("year".equals(detailInfo.item(k).getNodeName())) {
+                        year = Integer.parseInt(detailInfo.item(k).getFirstChild().getNodeValue());
+                    } else if ("month".equals(detailInfo.item(k).getNodeName())) {
+                        month = Integer.parseInt(detailInfo.item(k).getFirstChild().getNodeValue());
+                    } else if ("day".equals(detailInfo.item(k).getNodeName())) {
+                        day = Integer.parseInt(detailInfo.item(k).getFirstChild().getNodeValue());
+                    }
+                }
+                if (name != null)
+                    list.add(new Record(name, year, month, day));
+            }
+        }
+        return list;
     }
 }

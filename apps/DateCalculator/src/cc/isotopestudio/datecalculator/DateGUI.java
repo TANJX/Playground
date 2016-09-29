@@ -3,6 +3,7 @@ package cc.isotopestudio.datecalculator;/*
  * Copyright ISOTOPE Studio
  */
 
+import cc.isotopestudio.datecalculator.record.Record;
 import cc.isotopestudio.datecalculator.xml.XMLImpl;
 
 import javax.swing.*;
@@ -27,13 +28,16 @@ public class DateGUI {
     private JButton exitbtn;
     private JPanel panel;
     private JButton switchbtn;
-    private JButton modeButton;
+    private JButton modebtn;
     private JPanel panel2;
     private JSpinner cMonS;
     private JSpinner cDayS;
     private JSpinner cYearS;
     private JSpinner dDayS;
     private JTextField resultBoxP2;
+    private JButton recordsbtn;
+    private JTextArea recordsBox;
+    private JPanel panel3;
 
     private static JFrame frame;
 
@@ -46,16 +50,21 @@ public class DateGUI {
         frame.setVisible(true);
     }
 
-    boolean ifP1 = true;
-
     public DateGUI() {
-        XMLImpl dd = new XMLImpl();
-        String str = "C:\\Onedrive\\Coding\\Workspace\\Playground\\apps\\DateCalculator\\src\\cc\\isotopestudio\\datecalculator\\data.xml";
-        dd.init();
-        dd.createXML(str);
+        XMLImpl.init();
+        recordsBox.setText(Record.getAll());
 
-        final boolean[] ifP1 = {true};
+//        XMLImpl dd = new XMLImpl();
+//        String str = "data.xml";
+//
+//        File file = new File(str);
+//        dd.init();
+//        if (!file.exists())
+//            dd.createXML(str);
+
+        final boolean[] panelState = {true, true};
         panel2.setVisible(false);
+        panel3.setVisible(true);
         GregorianCalendar g = new GregorianCalendar();
         aYearS.setValue(g.get(Calendar.YEAR));
         aMonS.setValue(g.get(Calendar.MONTH) + 1);
@@ -129,7 +138,7 @@ public class DateGUI {
         switchbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dd.addRecord("Test", new ISODate((int) aYearS.getValue(), (int) aDayS.getValue(), (int) aMonS.getValue()));
+                XMLImpl.addRecord("Test", new ISODate((int) aYearS.getValue(), (int) aDayS.getValue(), (int) aMonS.getValue()));
                 int m = (int) aMonS.getValue();
                 int d = (int) aDayS.getValue();
                 int y = (int) aYearS.getValue();
@@ -141,19 +150,22 @@ public class DateGUI {
                 bDayS.setValue(d);
             }
         });
-        modeButton.addActionListener(new ActionListener() {
+
+        modebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (ifP1[0]) {
+                if (panelState[0]) {
                     panel2.setVisible(true);
                     panel1.setVisible(false);
                 } else {
                     panel1.setVisible(true);
                     panel2.setVisible(false);
                 }
-                ifP1[0] = !ifP1[0];
+                frame.pack();
+                panelState[0] = !panelState[0];
             }
         });
+
         cMonS.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -176,6 +188,20 @@ public class DateGUI {
             @Override
             public void stateChanged(ChangeEvent e) {
                 validateC();
+            }
+        });
+
+        recordsbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                recordsBox.setText(Record.getAll());
+                if (panelState[1]) {
+                    panel3.setVisible(false);
+                } else {
+                    panel3.setVisible(true);
+                }
+                frame.pack();
+                panelState[1] = !panelState[1];
             }
         });
     }

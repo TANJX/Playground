@@ -161,33 +161,31 @@
               <text value="Arpeggios"/>
             </properties>
           </component>
-          <component id="3d0a0" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="3d0a0" class="javax.swing.JButton" binding="dominantbtn">
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="Consolas" size="18"/>
-              <text value="Button"/>
+              <text value="Dominant seventh"/>
             </properties>
           </component>
-          <component id="334b5" class="javax.swing.JButton" binding="button2" default-binding="true">
+          <component id="334b5" class="javax.swing.JButton" binding="diminishedbtn">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="Consolas" size="18"/>
-              <text value="Button"/>
+              <text value="Diminished seventh"/>
             </properties>
           </component>
           <component id="405bf" class="javax.swing.JButton" binding="generateAllButton" default-binding="true">
             <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="200" height="40"/>
-                <maximum-size width="200" height="40"/>
-              </grid>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <background color="-10574081"/>
+              <font name="OCR A Std" size="18"/>
               <foreground color="-1"/>
               <text value="Generate All"/>
               <toolTipText value="Get all scales"/>
@@ -204,6 +202,12 @@
         <properties/>
         <border type="none"/>
         <children>
+          <component id="2a6ed" class="javax.swing.JButton" binding="clearbtn">
+            <constraints/>
+            <properties>
+              <text value="Clear"/>
+            </properties>
+          </component>
           <component id="68406" class="javax.swing.JButton" binding="infobtn">
             <constraints/>
             <properties>

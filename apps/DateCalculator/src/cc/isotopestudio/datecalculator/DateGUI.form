@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="cc.isotopestudio.datecalculator.DateGUI">
-  <grid id="c6955" binding="panel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="c6955" binding="panel" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="354" y="254" width="950" height="465"/>
+      <xy x="354" y="254" width="1304" height="465"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <toolbar id="68a42">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="-1" height="20"/>
           </grid>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="be4e7" class="javax.swing.JButton" binding="modeButton" default-binding="true">
+          <component id="be4e7" class="javax.swing.JButton" binding="modebtn">
             <constraints/>
             <properties>
               <text value="Mode"/>
+            </properties>
+          </component>
+          <component id="a350" class="javax.swing.JButton" binding="recordsbtn">
+            <constraints/>
+            <properties>
+              <text value="Records"/>
             </properties>
           </component>
           <component id="fd013" class="javax.swing.JButton" binding="infobtn">
@@ -452,6 +458,28 @@
               <font name="Consolas" size="26"/>
               <labelFor value="50823"/>
               <text value="To"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="5c23b" binding="panel3" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="20" left="20" bottom="20" right="20"/>
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="c723f" class="javax.swing.JTextArea" binding="recordsBox">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="300" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <editable value="false"/>
+              <font name="OCR A Std" size="18"/>
+              <text value="No Record&#10;Test"/>
             </properties>
           </component>
         </children>
