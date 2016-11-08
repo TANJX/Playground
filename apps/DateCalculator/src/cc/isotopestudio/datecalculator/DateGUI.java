@@ -89,11 +89,6 @@ public class DateGUI {
         exitbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int temp = (int) aMonS.getValue();
-                if (temp <= 0)
-                    aMonS.setValue(1);
-                else if (temp > 12)
-                    aMonS.setValue(12);
                 frame.dispose();
                 System.exit(0);
             }
