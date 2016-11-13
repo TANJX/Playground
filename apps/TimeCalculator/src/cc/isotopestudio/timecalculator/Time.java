@@ -1,4 +1,4 @@
-package app.timeCalculator;/*
+package cc.isotopestudio.timecalculator;/*
  * Created by Mars Tan on 10/28/2016.
  * Copyright ISOTOPE Studio
  */

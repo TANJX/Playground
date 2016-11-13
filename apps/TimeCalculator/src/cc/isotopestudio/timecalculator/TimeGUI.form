@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="app.timeCalculator.TimeGUI">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="cc.isotopestudio.timecalculator.TimeGUI">
   <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="516" height="400"/>
+      <xy x="20" y="20" width="576" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -18,8 +18,8 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="bbfc" binding="resultPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
+          <grid id="bbfc" binding="resultPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="40"/>
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <maximum-size width="-1" height="70"/>
@@ -33,38 +33,38 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Segoe UI Black" size="22"/>
                   <text value="Result"/>
                 </properties>
               </component>
               <component id="24951" class="javax.swing.JTextField" binding="resultField">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="4" fill="0" indent="0" use-parent-layout="false">
+                    <minimum-size width="100" height="-1"/>
                     <preferred-size width="150" height="-1"/>
+                    <maximum-size width="100" height="-1"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <font name="Myriad Pro" size="22"/>
+                  <horizontalAlignment value="11"/>
+                </properties>
               </component>
             </children>
           </grid>
-          <grid id="bd1d8" binding="time1MinutePanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="bd1d8" binding="time1MinutePanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <maximum-size width="-1" height="100"/>
-              </grid>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
-              <component id="9e375" class="javax.swing.JSpinner" binding="time1MinuteSpinner">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-              </component>
               <component id="37679" class="javax.swing.JSlider" binding="time1MinuteSlider">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <maximum-size width="170" height="-1"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <majorTickSpacing value="1"/>
@@ -78,40 +78,47 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Segoe UI Black" size="22"/>
                   <labelFor value="9e375"/>
                   <text value="Minute"/>
                 </properties>
               </component>
+              <component id="9e375" class="javax.swing.JSpinner" binding="time1MinuteSpinner">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <enabled value="true"/>
+                  <font name="Malgun Gothic" size="18"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="512ab" binding="time1HourPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="512ab" binding="time1HourPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <maximum-size width="-1" height="100"/>
-              </grid>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
-              <component id="7b77" class="javax.swing.JSpinner" binding="time1HourSpinner">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-              </component>
               <component id="47169" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Segoe UI Black" size="22"/>
                   <labelFor value="7b77"/>
                   <text value="Hour"/>
                 </properties>
               </component>
               <component id="748f8" class="javax.swing.JSlider" binding="time1HourSlider">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <maximum-size width="140" height="-1"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <majorTickSpacing value="1"/>
@@ -119,36 +126,42 @@
                   <snapToTicks value="true"/>
                 </properties>
               </component>
+              <component id="7b77" class="javax.swing.JSpinner" binding="time1HourSpinner">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <enabled value="true"/>
+                  <font name="Malgun Gothic" size="18"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="8d85f" binding="time2HourPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="8d85f" binding="time2HourPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <maximum-size width="-1" height="100"/>
-              </grid>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
-              <component id="32b53" class="javax.swing.JSpinner" binding="time2HourSpinner">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-              </component>
               <component id="97065" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Segoe UI Black" size="22"/>
                   <labelFor value="32b53"/>
                   <text value="Hour"/>
                 </properties>
               </component>
               <component id="4be44" class="javax.swing.JSlider" binding="time2HourSlider">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <maximum-size width="140" height="-1"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <majorTickSpacing value="1"/>
@@ -156,41 +169,58 @@
                   <snapToTicks value="true"/>
                 </properties>
               </component>
+              <component id="32b53" class="javax.swing.JSpinner" binding="time2HourSpinner">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <enabled value="true"/>
+                  <font name="Malgun Gothic" size="18"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="4b0aa" binding="time2MinutePanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="4b0aa" binding="time2MinutePanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <maximum-size width="-1" height="100"/>
-              </grid>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
-              <component id="b1a02" class="javax.swing.JSpinner" binding="time2MinuteSpinner">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-              </component>
               <component id="edfba" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
+                  <font name="Segoe UI Black" size="22"/>
                   <labelFor value="b1a02"/>
                   <text value="Minute"/>
                 </properties>
               </component>
               <component id="727e0" class="javax.swing.JSlider" binding="time2MinuteSlider">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <maximum-size width="170" height="-1"/>
+                  </grid>
                 </constraints>
                 <properties>
                   <majorTickSpacing value="1"/>
                   <maximum value="60"/>
                   <snapToTicks value="true"/>
+                </properties>
+              </component>
+              <component id="b1a02" class="javax.swing.JSpinner" binding="time2MinuteSpinner">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="70" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <enabled value="true"/>
+                  <font name="Malgun Gothic" size="18"/>
                 </properties>
               </component>
             </children>

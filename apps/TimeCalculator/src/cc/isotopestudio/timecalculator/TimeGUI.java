@@ -1,4 +1,4 @@
-package app.timeCalculator;/*
+package cc.isotopestudio.timecalculator;/*
  * Created by Mars Tan on 11/8/2016.
  * Copyright ISOTOPE Studio
  */
@@ -31,7 +31,7 @@ public class TimeGUI {
     private JSlider time1MinuteSlider;
     private JSpinner time1MinuteSpinner;
 
-    private static final String VERSION = "0.1.1";
+    private static final String VERSION = "0.2.0";
 
     public TimeGUI() {
 
