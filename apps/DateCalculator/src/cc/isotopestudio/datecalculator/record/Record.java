@@ -3,23 +3,25 @@ package cc.isotopestudio.datecalculator.record;/*
  * Copyright ISOTOPE Studio
  */
 
-import cc.isotopestudio.datecalculator.xml.XMLImpl;
+import cc.isotopestudio.datecalculator.ISODate;
 
 import java.util.List;
 
+import static cc.isotopestudio.datecalculator.DateGUI.xml;
+
 public class Record {
-    public static List<Record> records;
+    public static List<String> records;
 
     private String name;
     private int year;
     private int month;
     private int day;
 
-    public Record(String name, int year, int month, int day) {
+    public Record(String name, ISODate date) {
         this.name = name;
-        this.year = year;
-        this.month = month;
-        this.day = day;
+        this.year = date.getYear();
+        this.month = date.getMonth();
+        this.day = date.getDay();
     }
 
     public String getName() {
@@ -39,14 +41,10 @@ public class Record {
     }
 
     public static String getAll() {
-        try {
-            records = XMLImpl.getRecords();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        records = xml.getDates();
         String text = "";
-        for (Record record : records) {
-            text += record.toString();
+        for (String record : records) {
+            text += new Record(record, xml.getDateByName(record)).toString();
         }
         return text;
     }

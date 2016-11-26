@@ -4,7 +4,7 @@ package cc.isotopestudio.datecalculator;/*
  */
 
 import cc.isotopestudio.datecalculator.record.Record;
-import cc.isotopestudio.datecalculator.xml.XMLImpl;
+import cc.isotopestudio.datecalculator.xml.DOMXML;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -50,8 +50,11 @@ public class DateGUI {
         frame.setVisible(true);
     }
 
+    public static DOMXML xml;
+
     public DateGUI() {
-        XMLImpl.init();
+        xml = new DOMXML();
+        xml.init();
         recordsBox.setText(Record.getAll());
 
 //        XMLImpl dd = new XMLImpl();
@@ -133,7 +136,7 @@ public class DateGUI {
         switchbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                XMLImpl.addRecord("Test", new ISODate((int) aYearS.getValue(), (int) aDayS.getValue(), (int) aMonS.getValue()));
+                xml.addRecord("Test" + (int) (Math.random() * 100), new ISODate((int) aYearS.getValue(), (int) aMonS.getValue(), (int) aDayS.getValue()));
                 int m = (int) aMonS.getValue();
                 int d = (int) aDayS.getValue();
                 int y = (int) aYearS.getValue();
