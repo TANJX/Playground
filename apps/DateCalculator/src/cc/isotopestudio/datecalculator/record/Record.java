@@ -49,7 +49,6 @@ public class Record {
             text += record.toString();
         }
         return text;
-
     }
 
     @Override
