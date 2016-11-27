@@ -22,7 +22,7 @@ public class DOMXML {
     private Element rootElement;
     private Document doc;
     private File file;
-    private static final String path = "C:\\Users\\Mars Tan\\Desktop\\xml\\Date.xml";
+    private static final String path = "C:\\OneDrive\\apps\\Mars' Collection\\DateCalculator\\date.xml";
 
     public DOMXML() {
         init();

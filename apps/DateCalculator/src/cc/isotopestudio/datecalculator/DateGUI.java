@@ -9,11 +9,11 @@ import cc.isotopestudio.datecalculator.xml.DOMXML;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 public class DateGUI {
     private JSpinner aMonS;
@@ -38,13 +38,18 @@ public class DateGUI {
     private JButton recordsbtn;
     private JTextArea recordsBox;
     private JPanel panel3;
+    private JButton addbtn;
+    public JPanel recordPane;
+    private JButton button1;
+//    public JScrollPane recordPane;
 
     private static JFrame frame;
+    public static DateGUI dateGUI;
 
     public static void main(String[] args) {
         frame = new JFrame("Date Calculator 1.1.0");
         frame.setContentPane(new DateGUI().panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
@@ -52,18 +57,14 @@ public class DateGUI {
 
     public static DOMXML xml;
 
+    public java.util.List<JPanel> recordPanes = new ArrayList<>();
+
     public DateGUI() {
+        dateGUI = this;
         xml = new DOMXML();
         xml.init();
         recordsBox.setText(Record.getAll());
-
-//        XMLImpl dd = new XMLImpl();
-//        String str = "data.xml";
-//
-//        File file = new File(str);
-//        dd.init();
-//        if (!file.exists())
-//            dd.createXML(str);
+//        recordPane.setLayout(new FlowLayout());
 
         final boolean[] panelState = {true, true};
         panel2.setVisible(false);
@@ -136,7 +137,6 @@ public class DateGUI {
         switchbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                xml.addRecord("Test" + (int) (Math.random() * 100), new ISODate((int) aYearS.getValue(), (int) aMonS.getValue(), (int) aDayS.getValue()));
                 int m = (int) aMonS.getValue();
                 int d = (int) aDayS.getValue();
                 int y = (int) aYearS.getValue();
@@ -202,6 +202,24 @@ public class DateGUI {
                 panelState[1] = !panelState[1];
             }
         });
+        addbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new AddRecordGUI();
+                    }
+                });
+            }
+        });
+    }
+
+    public JPanel getRecordPane(String name, ISODate date) {
+        JPanel panel = new JPanel();
+        JLabel nameLb = new JLabel(name);
+        panel.add(nameLb);
+        panel.setSize(150, 100);
+        return panel;
     }
 
     private void vaildateA() {
