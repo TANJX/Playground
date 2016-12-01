@@ -1,3 +1,5 @@
+package app.mouseTrack;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +10,7 @@ public class MouseMove extends JFrame {
     }
 
     public static void main(String[] args) {
-        // MouseMove fm=new MouseMove("鼠标坐标测试");
+        // app.mouseTrack.MouseMove fm=new app.mouseTrack.MouseMove("鼠标坐标测试");
         JFrame fm = new JFrame("鼠标坐标测试");
         JPanel fp = new JPanel();
         fp.addMouseMotionListener(new myMouseListener());// 对在面板上的鼠标移动进行监听。
