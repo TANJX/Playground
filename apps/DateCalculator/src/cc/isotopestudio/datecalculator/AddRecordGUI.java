@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static cc.isotopestudio.datecalculator.DateGUI.dateGUI;
+import static cc.isotopestudio.datecalculator.DateGUI.recordTable;
 import static cc.isotopestudio.datecalculator.DateGUI.xml;
 
 public class AddRecordGUI {
@@ -69,6 +70,7 @@ public class AddRecordGUI {
                     for (JPanel pane : dateGUI.recordPanes)
                         dateGUI.recordPane.add(pane);
                     frame.dispose();
+                    recordTable.initRowsData();
                 }
             }
         });

@@ -3,22 +3,28 @@ package cc.isotopestudio.datecalculator.record;/*
  * Copyright ISOTOPE Studio
  */
 
+import cc.isotopestudio.datecalculator.DateCal;
 import cc.isotopestudio.datecalculator.ISODate;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import static cc.isotopestudio.datecalculator.DateGUI.xml;
 
 public class Record {
-    public static List<String> records;
+    private static List<Record> records = new ArrayList<>();
 
-    private String name;
-    private int year;
-    private int month;
-    private int day;
+    private final String name;
+    private final int year;
+    private final int month;
+    private final int day;
+    private final ISODate date;
 
     public Record(String name, ISODate date) {
         this.name = name;
+        this.date = date;
         this.year = date.getYear();
         this.month = date.getMonth();
         this.day = date.getDay();
@@ -26,6 +32,10 @@ public class Record {
 
     public String getName() {
         return name;
+    }
+
+    public ISODate getDate() {
+        return date;
     }
 
     public int getYear() {
@@ -40,13 +50,18 @@ public class Record {
         return day;
     }
 
-    public static String getAll() {
-        records = xml.getDates();
-        String text = "";
-        for (String record : records) {
-            text += new Record(record, xml.getDateByName(record)).toString();
+    public static List<Record> getAll() {
+        records.clear();
+        for (String record : xml.getDates()) {
+            records.add(new Record(record, xml.getDateByName(record)));
         }
-        return text;
+        return records;
+    }
+
+    private static final GregorianCalendar g = new GregorianCalendar();
+
+    public long getDiff() {
+        return DateCal.cal(g.get(Calendar.YEAR), g.get(Calendar.MONTH) + 1, g.get(Calendar.DATE), year, month, day);
     }
 
     @Override

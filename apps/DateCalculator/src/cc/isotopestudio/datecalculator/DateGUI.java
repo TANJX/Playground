@@ -9,11 +9,14 @@ import cc.isotopestudio.datecalculator.xml.DOMXML;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class DateGUI {
     private JSpinner aMonS;
@@ -36,12 +39,11 @@ public class DateGUI {
     private JSpinner dDayS;
     private JTextField resultBoxP2;
     private JButton recordsbtn;
-    private JTextArea recordsBox;
     private JPanel panel3;
     private JButton addbtn;
-    public JPanel recordPane;
-    private JButton button1;
-//    public JScrollPane recordPane;
+    public static RecordTable recordTable;
+    public JScrollPane recordPane;
+    //    public JScrollPane recordPane;
 
     private static JFrame frame;
     public static DateGUI dateGUI;
@@ -63,8 +65,9 @@ public class DateGUI {
         dateGUI = this;
         xml = new DOMXML();
         xml.init();
-        recordsBox.setText(Record.getAll());
 //        recordPane.setLayout(new FlowLayout());
+        recordTable = new RecordTable();
+        recordPane.setViewportView(recordTable);
 
         final boolean[] panelState = {true, true};
         panel2.setVisible(false);
@@ -192,7 +195,6 @@ public class DateGUI {
         recordsbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                recordsBox.setText(Record.getAll());
                 if (panelState[1]) {
                     panel3.setVisible(false);
                 } else {
