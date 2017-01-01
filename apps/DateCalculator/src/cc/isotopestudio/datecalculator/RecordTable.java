@@ -20,6 +20,12 @@ public class RecordTable extends JTable {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
+
+            @Override
+            public void setValueAt(Object aValue, int row, int column) {
+                super.setValueAt(aValue, row, column);
+                fireTableCellUpdated(row, column);
+            }
         };
         this.setModel(defaultTableModel);
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -28,7 +34,7 @@ public class RecordTable extends JTable {
     }
 
     void initRowsData() {
-        this.removeRowsData();
+//        this.removeRowsData();
 
         List<Record> recordList = Record.getAll();
         String[] row = new String[6];
@@ -45,9 +51,11 @@ public class RecordTable extends JTable {
                 row[5] = "TODAY";
             }
             i++;
-            defaultTableModel.addRow(row);
+            defaultTableModel.addRow(row.clone());
         }
-        this.revalidate();
+//        this.revalidate();
+
+        this.updateUI();
     }
 
     private void removeRowsData() {

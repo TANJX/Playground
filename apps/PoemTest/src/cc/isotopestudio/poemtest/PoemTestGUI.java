@@ -25,13 +25,13 @@ public class PoemTestGUI {
         // TODO Auto-generated method stub
         JFrame frame = new JFrame("Ä¬Ð´³é²é");
         JButton button = new JButton("³é²é");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setSize(100, 100);
         // Center on screen
         Toolkit toolkit = frame.getToolkit();
         Dimension size = toolkit.getScreenSize(); // resolution of the monitor
         frame.setLocation(size.width / 2 - frame.getWidth() / 2, size.height / 2 - frame.getHeight() / 2);
 
-        frame.setSize(100, 100);
         frame.add(button);
 
         button.addActionListener(new ActionListener() {
