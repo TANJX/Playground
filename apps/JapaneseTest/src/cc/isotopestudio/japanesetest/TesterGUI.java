@@ -5,52 +5,82 @@ package cc.isotopestudio.japanesetest;
  */
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
-import static cc.isotopestudio.japanesetest.Japanese.HIRAGANA;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class TesterGUI {
+    private final boolean TYPE;
+    private final List<String> kana;
+
     private JTextField AnswerField;
     private JPanel panel1;
     private JTextField QuestionField;
     private JTextArea infoArea;
 
-    private int current;
+    private boolean started = false;
     private long time = -1;
 
-    private TesterGUI() {
-        update();
+
+    TesterGUI(boolean hiragana) {
+        this.TYPE = hiragana;
+        if (TYPE) {
+            kana = new ArrayList<>(Arrays.asList(Japanese.HIRAGANA));
+        } else {
+            kana = new ArrayList<>(Arrays.asList(Japanese.KATAKANA));
+        }
+        Collections.shuffle(kana);
+        QuestionField.setFont(new Font("Microsoft YaHei", 0, 30));
+        QuestionField.setText("Start");
+        AnswerField.setText("");
         AnswerField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (AnswerField.getText().equals(Japanese.ROMAJI[current])) {
+                if (started && AnswerField.getText().equals(Japanese.getRomaji(QuestionField.getText()))
+                        || AnswerField.getText().equalsIgnoreCase("Start")) {
                     update();
                     e.consume();
                 }
             }
         });
+        JFrame frame = new JFrame("TesterGUI");
+        frame.setContentPane(panel1);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setResizable(false);
     }
 
     private void update() {
-        if (time != -1) {
-            long diff = System.currentTimeMillis() - time;
-            int mili = (int) ((diff) % 1000);
-            int sec = (int) ((diff) / 1000);
-            infoArea.setText(infoArea.getText() + "\n" + HIRAGANA[current] + ": " + sec + "." + mili);
-            System.out.println(diff);
+        if (!started) {
+            started = true;
+            QuestionField.setFont(new Font("Microsoft YaHei", 0, 100));
+            update();
+        } else {
+            if (time != -1) {
+                int diff = (int) (System.currentTimeMillis() - time);
+                int mili = (int) ((diff) % 1000);
+                int sec = (int) ((diff) / 1000);
+                infoArea.setText(infoArea.getText() + "\n" + QuestionField.getText() + ": " + sec + "." + mili);
+                WelcomeGUI.addRecord(QuestionField.getText(), diff);
+                System.out.println(diff);
+            }
+            if (kana.size() > 0) {
+                QuestionField.setText(kana.remove(0));
+                AnswerField.setText("");
+                time = System.currentTimeMillis();
+            } else {
+                // FINISH
+                QuestionField.setFont(new Font("Microsoft YaHei", 0, 30));
+                AnswerField.setFont(new Font("Microsoft YaHei", 0, 30));
+                QuestionField.setText("FINISHED");
+                AnswerField.setText("FINISHED");
+                AnswerField.setEditable(false);
+            }
         }
-        current = (int) (Math.random() * HIRAGANA.length);
-        QuestionField.setText(String.valueOf(HIRAGANA[current]));
-        AnswerField.setText("");
-        time = System.currentTimeMillis();
-    }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Japanese Tester");
-        frame.setContentPane(new TesterGUI().panel1);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
     }
 }
