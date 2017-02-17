@@ -4,65 +4,49 @@ package cc.isotopestudio.japanesetest;
  * Copyright ISOTOPE Studio
  */
 
-import cc.isotopestudio.japanesetest.sql.SQLite;
+import cc.isotopestudio.japanesetest.sql.SqlManager;
 
 import javax.swing.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.awt.*;
 
 public class WelcomeGUI {
+    private static final String VERSION = "1.1.0";
+
+    private static JFrame frame;
     private JPanel panel1;
     private JButton hiriganaQuizButton;
     private JButton katakanaQuizButton;
+    private JButton infoButton;
+    private JButton exitButton;
 
-    public WelcomeGUI() {
-        hiriganaQuizButton.addActionListener(e -> {
-            new TesterGUI(true);
+    private WelcomeGUI() {
+        hiriganaQuizButton.addActionListener(e -> new TesterGUI(true));
+        katakanaQuizButton.addActionListener(e -> new TesterGUI(false));
+        infoButton.addActionListener(e -> {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(frame, "Japanese Test " + VERSION + "\nISOTOPE Studio, Mars\n2016.9.26",
+                    "Info",
+                    JOptionPane.INFORMATION_MESSAGE);
         });
-        katakanaQuizButton.addActionListener(e -> {
-            new TesterGUI(false);
+        exitButton.addActionListener(e -> {
+            frame.dispose();
+            System.exit(0);
         });
     }
 
-    static Connection c;
-    static Statement statement;
 
     public static void main(String[] args) {
-        SQLite db = new SQLite("C:\\OneDrive\\apps\\Mars' Collection\\Japanese\\", "data.db");
+        SqlManager.init();
 
-        try {
-            c = db.openConnection();
-            statement = c.createStatement();
-            String sql = "CREATE TABLE record " +
-                    "(ID INT PRIMARY KEY     NOT NULL," +
-                    " KANA           CHARACTER(1)    NOT NULL, " +
-                    " TIME           INT     NOT NULL)";
-            statement.executeUpdate(sql);
-//            statement.close();
-//            c.close();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-//            return;
-        }
-
-        JFrame frame = new JFrame("Welcome");
+        frame = new JFrame("Japanese Test " + VERSION);
         frame.setContentPane(new WelcomeGUI().panel1);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        Toolkit toolkit = frame.getToolkit();
+        Dimension size = toolkit.getScreenSize(); // resolution of the monitor
+        frame.setLocation(size.width / 2 - frame.getWidth() / 2, size.height / 2 - frame.getHeight() / 2);
+
     }
 
-    static void addRecord(String kana, int time) {
-        try {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO record VALUES(?,?,?)");
-            ps.setString(1, String.valueOf(System.currentTimeMillis()));
-            ps.setString(2, kana);
-            ps.setString(3, String.valueOf(time));
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
