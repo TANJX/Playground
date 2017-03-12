@@ -1,56 +1,50 @@
 package cc.isotopestudio.fileextensionrenamer;
 
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import javax.swing.*;
-
 class MainPanel extends JPanel {
-    JButton start;
-    JFileChooser jFileChooser;
-    JTextField extentionField;
-    File files[];
-    JFrame listFrame;
-    JScrollPane pane;
-    JTextArea textArea;
-    JButton confirm;
+    private JFileChooser jFileChooser;
+    private JTextField extentionField;
+    private File files[];
+    private JFrame listFrame;
+    private JScrollPane pane;
+    private JTextArea textArea;
+    private JButton confirm;
 
     MainPanel() {
-        start = new JButton("Choose Files...");
+        JButton start = new JButton("Choose Files...");
         extentionField = new JTextField();
         extentionField.setColumns(10);
         add(new JLabel("New Extention"));
         //(if files have no extension, add '.' before new extension):
         add(extentionField);
         add(start);
-        start.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                jFileChooser = new JFileChooser();
-                jFileChooser.setMultiSelectionEnabled(true);
-                int returnVal = jFileChooser.showOpenDialog(null);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    files = jFileChooser.getSelectedFiles();
-                    listFrame = new JFrame("Files");
-                    pane = new JScrollPane();
-                    textArea = new JTextArea();
-                    textArea.setEditable(false);
-                    textArea.setText(info(files));
-                    pane.setViewportView(textArea);
-                    confirm = new JButton("Continue");
-                    confirm.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent arg0) {
-                            rename(files);
-                            JOptionPane.showMessageDialog(listFrame, "Succeed! ");
-                            listFrame.remove(confirm);
-                        }
-                    });
-                    listFrame.add(pane, BorderLayout.CENTER);
-                    listFrame.add(confirm, BorderLayout.SOUTH);
-                    listFrame.setSize(600, 700);
-                    listFrame.setVisible(true);
-                }
+        start.addActionListener(arg0 -> {
+            jFileChooser = new JFileChooser();
+            jFileChooser.setMultiSelectionEnabled(true);
+            int returnVal = jFileChooser.showOpenDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                files = jFileChooser.getSelectedFiles();
+                listFrame = new JFrame("Files");
+                pane = new JScrollPane();
+                textArea = new JTextArea();
+                textArea.setEditable(false);
+                textArea.setText(info(files));
+                pane.setViewportView(textArea);
+                confirm = new JButton("Continue");
+                confirm.addActionListener(arg01 -> {
+                    rename(files);
+                    JOptionPane.showMessageDialog(listFrame, "Succeed! ");
+                    listFrame.remove(confirm);
+                });
+                listFrame.add(pane, BorderLayout.CENTER);
+                listFrame.add(confirm, BorderLayout.SOUTH);
+                listFrame.setSize(600, 700);
+                listFrame.setVisible(true);
             }
         });
     }

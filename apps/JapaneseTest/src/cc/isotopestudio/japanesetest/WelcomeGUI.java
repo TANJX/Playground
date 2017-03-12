@@ -46,7 +46,7 @@ public class WelcomeGUI {
         Toolkit toolkit = frame.getToolkit();
         Dimension size = toolkit.getScreenSize(); // resolution of the monitor
         frame.setLocation(size.width / 2 - frame.getWidth() / 2, size.height / 2 - frame.getHeight() / 2);
-
+        frame.setResizable(false);
     }
 
 }
