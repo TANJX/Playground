@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class TypeGUI {
     private JTextField aText;
@@ -19,17 +20,21 @@ public class TypeGUI {
     private JTextField tText;
     private JTextField qTextA;
     private JTextField qTextB;
+    private JLabel speedLabel;
 
     private final String filename;
     private final String text;
 
     private long start;
     private int position = 0;
+    private boolean started;
     private boolean finished;
+    private int errors = 0;
+    private java.util.List<Integer> secPos = new ArrayList<>();
 
-    public TypeGUI(String filename, String text) {
+    public TypeGUI(String filename, String rawText) {
         this.filename = filename;
-        this.text = text;
+        this.text = processString(rawText);
         JFrame frame = new JFrame(filename);
         frame.setContentPane(mainPane);
         frame.pack();
@@ -41,11 +46,32 @@ public class TypeGUI {
 
         qTextB.setText(text);
 
+        Thread timerThread = new Thread(() -> {
+
+            while (!finished) {
+                secPos.add(position);
+                timeLabel.setText("Consumed time: " + ((System.currentTimeMillis() - start) / 1000) + "s");
+                if (secPos.size() > 1) {
+                    speedLabel.setText(secPos.get(secPos.size() - 1) - secPos.get(secPos.size() - 2) + " char per sec");
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         aText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
 //                super.keyTyped(e);
-                System.out.println(text.charAt(position) + " " + e.getKeyChar());
+                if (!started) {
+                    started = true;
+                    start = System.currentTimeMillis();
+                    timerThread.start();
+                }
+//                System.out.println(text.charAt(position) + " " + e.getKeyChar());
                 if (isSame(text.charAt(position), e.getKeyChar())) {
                     updateProgress();
                     position++;
@@ -56,21 +82,11 @@ public class TypeGUI {
                 } else {
                     aText.setCaretColor(new Color(255, 48, 50));
                     aText.setText("");
+                    errors++;
                 }
             }
         });
 
-        new Thread(() -> {
-
-            while (!finished) {
-                timeLabel.setText("Consumed time: " + ((System.currentTimeMillis() - start) / 1000) + "s");
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
 
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -78,7 +94,6 @@ public class TypeGUI {
                 Typpy.welcomeGUI.finish();
             }
         });
-        start = System.currentTimeMillis();
         updateProgress();
     }
 
@@ -89,7 +104,11 @@ public class TypeGUI {
         qTextB.setText(text.substring(position, Math.min(position + 33, text.length())));
         aText.setText("");
         progressLabel.setText(Math.min(100,
-                Math.round(100.0 * aText.getText().length() / text.length())) + "%");
+                Math.round(100.0 * tText.getText().length() / text.length())) + "%");
+    }
+
+    private String processString(String s) {
+        return s.replaceAll("  ", " ").replaceAll("\t", " ");
     }
 
     private boolean isSame(char a, char b) {

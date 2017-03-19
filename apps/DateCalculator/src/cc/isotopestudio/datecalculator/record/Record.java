@@ -1,4 +1,5 @@
-package cc.isotopestudio.datecalculator.record;/*
+package cc.isotopestudio.datecalculator.record;
+/*
  * Created by Mars on 9/28/2016.
  * Copyright ISOTOPE Studio
  */
@@ -14,7 +15,7 @@ import java.util.List;
 import static cc.isotopestudio.datecalculator.DateGUI.xml;
 
 public class Record {
-    private static List<Record> records = new ArrayList<>();
+    private static final List<Record> records = new ArrayList<>();
 
     private final String name;
     private final int year;
@@ -22,7 +23,7 @@ public class Record {
     private final int day;
     private final ISODate date;
 
-    public Record(String name, ISODate date) {
+    private Record(String name, ISODate date) {
         this.name = name;
         this.date = date;
         this.year = date.getYear();
@@ -66,13 +67,11 @@ public class Record {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Record{");
-        sb.append("name='").append(name).append('\'');
-        sb.append(", year=").append(year);
-        sb.append(", month=").append(month);
-        sb.append(", day=").append(day);
-        sb.append("}\n");
-        return sb.toString();
+        return "Record{" + "name='" + name + '\'' +
+                ", year=" + year +
+                ", month=" + month +
+                ", day=" + day +
+                "}\n";
     }
 
     public static void sort() {

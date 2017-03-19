@@ -4,7 +4,7 @@ package cc.isotopestudio.datecalculator;
  * Copyright ISOTOPE Studio
  */
 
-public class DateCal {
+public abstract class DateCal {
 
     private static boolean ifYear(int a) {
         return a % 100 == 0 ? a % 400 == 0 : a % 4 == 0;

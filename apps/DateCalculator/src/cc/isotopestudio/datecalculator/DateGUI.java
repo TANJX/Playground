@@ -3,20 +3,14 @@ package cc.isotopestudio.datecalculator;/*
  * Copyright ISOTOPE Studio
  */
 
-import cc.isotopestudio.datecalculator.record.Record;
 import cc.isotopestudio.datecalculator.xml.DOMXML;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
+
+import static cc.isotopestudio.datecalculator.CalMain.VERSION;
 
 public class DateGUI {
     private JSpinner aMonS;
@@ -41,28 +35,24 @@ public class DateGUI {
     private JButton recordsbtn;
     private JPanel panel3;
     private JButton addbtn;
-    public static RecordTable recordTable;
+    static RecordTable recordTable;
     public JScrollPane recordPane;
-    //    public JScrollPane recordPane;
 
     private static JFrame frame;
-    public static DateGUI dateGUI;
 
-    public static void main(String[] args) {
-        frame = new JFrame("Date Calculator 1.1.0");
-        frame.setContentPane(new DateGUI().panel);
+    public static DOMXML xml;
+
+    DateGUI() {
+        frame = new JFrame("Date Calculator " + VERSION);
+        frame.setContentPane(panel);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
-    }
+        Toolkit toolkit = frame.getToolkit();
+        Dimension size = toolkit.getScreenSize(); // resolution of the monitor
+        frame.setLocation(size.width / 2 - frame.getWidth() / 2, (size.height - 50) / 2 - frame.getHeight() / 2);
 
-    public static DOMXML xml;
-
-    public java.util.List<JPanel> recordPanes = new ArrayList<>();
-
-    public DateGUI() {
-        dateGUI = this;
         xml = new DOMXML();
         xml.init();
 //        recordPane.setLayout(new FlowLayout());
@@ -84,144 +74,62 @@ public class DateGUI {
         cDayS.setValue(g.get(Calendar.DATE));
         updateP1();
         updateP2();
-        infobtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(frame, "Date Calculator 1.1.0\nISOTOPE Studio, Mars\n2016.9.26",
-                        "Info",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
+        infobtn.addActionListener(e -> {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(frame, "Date Calculator " + VERSION + "\nISOTOPE Studio, Mars\n2017.3.19",
+                    "Info",
+                    JOptionPane.INFORMATION_MESSAGE);
         });
-        exitbtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                System.exit(0);
-            }
+        exitbtn.addActionListener(e -> {
+            frame.dispose();
+            System.exit(0);
         });
 
-        aYearS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                vaildateA();
-            }
-        });
-        aDayS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                vaildateA();
-            }
-        });
-        aMonS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                vaildateA();
-            }
-        });
-        bYearS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                vaildateB();
-            }
-        });
-        bDayS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                vaildateB();
-            }
-        });
-        bMonS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                vaildateB();
-            }
-        });
-        switchbtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int m = (int) aMonS.getValue();
-                int d = (int) aDayS.getValue();
-                int y = (int) aYearS.getValue();
-                aMonS.setValue(bMonS.getValue());
-                aYearS.setValue(bYearS.getValue());
-                aDayS.setValue(bDayS.getValue());
-                bMonS.setValue(m);
-                bYearS.setValue(y);
-                bDayS.setValue(d);
-            }
+        aYearS.addChangeListener(e -> vaildateA());
+        aDayS.addChangeListener(e -> vaildateA());
+        aMonS.addChangeListener(e -> vaildateA());
+        bYearS.addChangeListener(e -> vaildateB());
+        bDayS.addChangeListener(e -> vaildateB());
+        bMonS.addChangeListener(e -> vaildateB());
+        switchbtn.addActionListener(e -> {
+            int m = (int) aMonS.getValue();
+            int d = (int) aDayS.getValue();
+            int y = (int) aYearS.getValue();
+            aMonS.setValue(bMonS.getValue());
+            aYearS.setValue(bYearS.getValue());
+            aDayS.setValue(bDayS.getValue());
+            bMonS.setValue(m);
+            bYearS.setValue(y);
+            bDayS.setValue(d);
         });
 
-        modebtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (panelState[0]) {
-                    panel2.setVisible(true);
-                    panel1.setVisible(false);
-                } else {
-                    panel1.setVisible(true);
-                    panel2.setVisible(false);
-                }
-                frame.pack();
-                panelState[0] = !panelState[0];
+        modebtn.addActionListener(e -> {
+            if (panelState[0]) {
+                panel2.setVisible(true);
+                panel1.setVisible(false);
+            } else {
+                panel1.setVisible(true);
+                panel2.setVisible(false);
             }
+            frame.pack();
+            panelState[0] = !panelState[0];
         });
 
-        cMonS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                validateC();
-            }
-        });
-        cDayS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                validateC();
-            }
-        });
-        cYearS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                validateC();
-            }
-        });
-        dDayS.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                validateC();
-            }
-        });
+        cMonS.addChangeListener(e -> validateC());
+        cDayS.addChangeListener(e -> validateC());
+        cYearS.addChangeListener(e -> validateC());
+        dDayS.addChangeListener(e -> validateC());
 
-        recordsbtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (panelState[1]) {
-                    panel3.setVisible(false);
-                } else {
-                    panel3.setVisible(true);
-                }
-                frame.pack();
-                panelState[1] = !panelState[1];
+        recordsbtn.addActionListener(e -> {
+            if (panelState[1]) {
+                panel3.setVisible(false);
+            } else {
+                panel3.setVisible(true);
             }
+            frame.pack();
+            panelState[1] = !panelState[1];
         });
-        addbtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        new AddRecordGUI();
-                    }
-                });
-            }
-        });
-    }
-
-    public JPanel getRecordPane(String name, ISODate date) {
-        JPanel panel = new JPanel();
-        JLabel nameLb = new JLabel(name);
-        panel.add(nameLb);
-        panel.setSize(150, 100);
-        return panel;
+        addbtn.addActionListener(e -> EventQueue.invokeLater(AddRecordGUI::new));
     }
 
     private void vaildateA() {
@@ -266,7 +174,7 @@ public class DateGUI {
         updateP1();
     }
 
-    public void validateC() {
+    private void validateC() {
         int temp = (int) cYearS.getValue();
         if (temp <= 0)
             cYearS.setValue(1);

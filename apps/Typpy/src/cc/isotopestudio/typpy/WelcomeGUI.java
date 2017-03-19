@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 public class WelcomeGUI {
-    private static final String VERSION = "1.0.0";
+    private static final String VERSION = "1.1.1";
 
     private JFrame frame;
     private JPanel mainPane;
