@@ -62,7 +62,12 @@ public class Record {
     private static final GregorianCalendar g = new GregorianCalendar();
 
     public long getDiff() {
-        return DateCal.cal(g.get(Calendar.YEAR), g.get(Calendar.MONTH) + 1, g.get(Calendar.DATE), year, month, day);
+        return (DateCal.ifLarger(g.get(Calendar.YEAR), g.get(Calendar.MONTH) + 1, g.get(Calendar.DATE),
+                year, month, day)) ?
+                DateCal.cal(g.get(Calendar.YEAR), g.get(Calendar.MONTH) + 1, g.get(Calendar.DATE),
+                        year, month, day) :
+                -DateCal.cal(year, month, day,
+                        g.get(Calendar.YEAR), g.get(Calendar.MONTH) + 1, g.get(Calendar.DATE));
     }
 
     @Override

@@ -7,6 +7,8 @@ import cc.isotopestudio.datecalculator.xml.DOMXML;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -37,6 +39,8 @@ public class DateGUI {
     private JButton addbtn;
     static RecordTable recordTable;
     public JScrollPane recordPane;
+    private JButton chronSortbtn;
+    private JButton normalSortbtn;
 
     private static JFrame frame;
 
@@ -130,6 +134,12 @@ public class DateGUI {
             panelState[1] = !panelState[1];
         });
         addbtn.addActionListener(e -> EventQueue.invokeLater(AddRecordGUI::new));
+        normalSortbtn.addActionListener(e -> {
+
+        });
+        chronSortbtn.addActionListener(e -> {
+
+        });
     }
 
     private void vaildateA() {

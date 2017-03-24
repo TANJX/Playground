@@ -21,7 +21,7 @@ public abstract class DateCal {
             return 0;
     }
 
-    static boolean ifLarger(int aYear, int aMonth, int aDay, int bYear, int bMonth, int bDay) {
+    public static boolean ifLarger(int aYear, int aMonth, int aDay, int bYear, int bMonth, int bDay) {
         if (bYear > aYear)
             return true;
         if (aYear > bYear)

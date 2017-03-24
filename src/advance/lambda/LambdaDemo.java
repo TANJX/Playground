@@ -9,29 +9,20 @@ import java.util.Date;
 public class LambdaDemo {
 
     public static void main(String[] args) {
-        test1(s -> System.out.println(s + "!"));
-        test1(s -> {
-            System.out.println(s + "!");
-            System.out.println("Great!");
-        });
-        test2(() -> {
-            System.out.println(new Date().toString());
-        });
+        Action1 a1 = s -> System.out.println(s + "!");
+        Action1 directPrint = System.out::println;
+        Action2 date = () -> System.out.println(new Date());
+        a1.out("Mars");
+        date.out();
     }
 
+    @FunctionalInterface
     private interface Action1 {
         void out(String s);
     }
 
+    @FunctionalInterface
     private interface Action2 {
         void out();
-    }
-
-    private static void test1(Action1 action) {
-        action.out("WOW");
-    }
-
-    private static void test2(Action2 action) {
-        action.out();
     }
 }
