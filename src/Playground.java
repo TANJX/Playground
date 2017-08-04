@@ -3,11 +3,18 @@
  * Copyright ISOTOPE Studio
  */
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Playground {
 
     public static void main(String[] args) {
-            System.out.println("a b c ".split(" ").length);
-
+        String PATTERN = "\\d+";
+        Pattern r = Pattern.compile(PATTERN);
+        String line = "≤‚ ‘π…£∫123 «";
+        Matcher m = r.matcher(line);
+        System.out.println(m.find());
+        System.out.println(m.group(0));
     }
 
 }
