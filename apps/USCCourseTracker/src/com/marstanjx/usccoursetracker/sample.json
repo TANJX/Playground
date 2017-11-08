@@ -1,0 +1,306 @@
+{
+  "schd_sync_dtm": "11\/7\/2017 3:57:54 PM",
+  "Dept_Info": {
+    "department": "Communication and Journalism",
+    "abbreviation": "ASCJ",
+    "phone_number": "(213)740-0900",
+    "address": "ASC 140",
+    "ugrad_dclass_phone_number": " - ",
+    "ugrad_dclass_address": {},
+    "grad_dclass_phone_number": "(213)740-0900",
+    "grad_dclass_address": "ASC 140",
+    "Notes": "All graduate students (excluding PhDs) will be assessed a $150 per semester \"ASCJ Technology fee. There is no technology fee charged for the summer term. Phone (213)740-5297, or email asctech@usc.edu for questions. Note that many ASCJ classes have non-standard start and end dates; click on the info icon next to each section for Special Session details",
+    "TermNotes": {}
+  },
+  "OfferedCourses": {
+    "course": [
+      {
+        "IsCrossListed": "N",
+        "PublishedCourseID": "ASCJ-200",
+        "ScheduledCourseID": "ASCJ-200",
+        "CourseData": {
+          "prefix": "ASCJ",
+          "number": "200",
+          "sequence": {},
+          "suffix": {},
+          "title": "Navigating Media and News in the Digital Age",
+          "description": "Students will be engaged as discriminating media\/news consumers and contributors. Emphasis on critical skills needed to understand, employ, enjoy and help shape our media landscape.",
+          "units": "4.0",
+          "restriction_by_major": {},
+          "restriction_by_class": {},
+          "restriction_by_school": {},
+          "CourseNotes": {},
+          "CourseTermNotes": {},
+          "prereq_text": {},
+          "coreq_text": {},
+          "SectionData": [
+            {
+              "id": "21911",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Navigating Media and News in the Digital Age",
+              "section_title": {},
+              "description": "Register for lec & lab",
+              "notes": {},
+              "type": "Lec",
+              "units": "4.0",
+              "spaces_available": "90",
+              "number_registered": "78",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": "N",
+              "day": "TH",
+              "start_time": "11:00",
+              "end_time": "12:20",
+              "location": "ASC204",
+              "instructor": [
+                {
+                  "last_name": "Trope",
+                  "first_name": "Alison",
+                  "bio_url": "http:\/\/annenberg.usc.edu\/faculty\/communication\/alison-trope"
+                },
+                {
+                  "last_name": "Tolan",
+                  "first_name": "Sandy"
+                }
+              ],
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            },
+            {
+              "id": "21912",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Navigating Media and News in the Digital Age",
+              "section_title": {},
+              "description": {},
+              "notes": {},
+              "type": "Lab",
+              "units": "0.0",
+              "spaces_available": "18",
+              "number_registered": "18",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": "N",
+              "day": "T",
+              "start_time": "09:00",
+              "end_time": "10:20",
+              "location": "ANN309",
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            },
+            {
+              "id": "21913",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Navigating Media and News in the Digital Age",
+              "section_title": {},
+              "description": {},
+              "notes": {},
+              "type": "Lab",
+              "units": "0.0",
+              "spaces_available": "18",
+              "number_registered": "18",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": {},
+              "day": "T",
+              "start_time": "12:30",
+              "end_time": "13:50",
+              "location": "ANN408",
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            },
+            {
+              "id": "21914",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Navigating Media and News in the Digital Age",
+              "section_title": {},
+              "description": {},
+              "notes": {},
+              "type": "Lab",
+              "units": "0.0",
+              "spaces_available": "18",
+              "number_registered": "17",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": "N",
+              "day": "T",
+              "start_time": "16:00",
+              "end_time": "17:20",
+              "location": "ANN406",
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            },
+            {
+              "id": "21915",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Navigating Media and News in the Digital Age",
+              "section_title": {},
+              "description": {},
+              "notes": {},
+              "type": "Lab",
+              "units": "0.0",
+              "spaces_available": "18",
+              "number_registered": "7",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": "N",
+              "day": "H",
+              "start_time": "09:00",
+              "end_time": "10:20",
+              "location": "ANN309",
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            },
+            {
+              "id": "21916",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Navigating Media and News in the Digital Age",
+              "section_title": {},
+              "description": {},
+              "notes": {},
+              "type": "Lab",
+              "units": "0.0",
+              "spaces_available": "18",
+              "number_registered": "18",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": "N",
+              "day": "H",
+              "start_time": "12:30",
+              "end_time": "13:50",
+              "location": "ANN408",
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            }
+          ]
+        }
+      },
+      {
+        "IsCrossListed": "N",
+        "PublishedCourseID": "ASCJ-210",
+        "ScheduledCourseID": "ASCJ-210",
+        "CourseData": {
+          "prefix": "ASCJ",
+          "number": "210",
+          "sequence": {},
+          "suffix": {},
+          "title": "Contours of Change in Media and Communication",
+          "description": "Provides an introduction to cultivating a curious, critical, and proactive approach to the challenges of social change. Students will be encouraged to develop an expansive and critical definition and understanding of change as it relates to the role of media and communication in producing and responding to political and cultural transformations that shape our status as citizens and our ideas of citizenship.",
+          "units": "4.0, 0",
+          "restriction_by_major": {},
+          "restriction_by_class": {},
+          "restriction_by_school": {},
+          "CourseNotes": {},
+          "CourseTermNotes": {},
+          "prereq_text": {},
+          "coreq_text": {},
+          "SectionData": [
+            {
+              "id": "21920",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Contours of Change in Media and Communication",
+              "section_title": {},
+              "description": "Register for lec & 1 disc",
+              "notes": {},
+              "type": "Lec",
+              "units": "4.0",
+              "spaces_available": "50",
+              "number_registered": "31",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": "N",
+              "day": "TH",
+              "start_time": "09:30",
+              "end_time": "10:50",
+              "location": "ASC231",
+              "instructor": {
+                "last_name": "Lloyd",
+                "first_name": "Mark",
+                "bio_url": "http:\/\/annenberg.usc.edu\/faculty\/communication\/mark-lloyd"
+              },
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            },
+            {
+              "id": "21926",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Contours of Change in Media and Communication",
+              "section_title": {},
+              "description": {},
+              "notes": {},
+              "type": "Dis",
+              "units": "0.0",
+              "spaces_available": "25",
+              "number_registered": "12",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": "N",
+              "day": "W",
+              "start_time": "10:00",
+              "end_time": "10:50",
+              "location": "ANN210",
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            },
+            {
+              "id": "21927",
+              "session": "001",
+              "dclass_code": "R",
+              "title": "Contours of Change in Media and Communication",
+              "section_title": {},
+              "description": {},
+              "notes": {},
+              "type": "Dis",
+              "units": "0.0",
+              "spaces_available": "25",
+              "number_registered": "19",
+              "wait_qty": "0",
+              "canceled": "N",
+              "blackboard": "N",
+              "day": "W",
+              "start_time": "11:00",
+              "end_time": "11:50",
+              "location": "ANN210",
+              "syllabus": {
+                "format": {},
+                "filesize": {}
+              },
+              "IsDistanceLearning": "N"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

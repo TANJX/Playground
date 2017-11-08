@@ -131,7 +131,6 @@ public class CoursePlanGUI {
     private JLabel creditLabel7;
     private JLabel creditLabel8;
     private JLabel remainCreditLabel;
-    private JTree tree1;
 
     private final java.util.List<JComboBox> cb = Arrays.asList(c1_1, c1_2, c1_3, c1_4, c1_5,
             c2_1, c2_2, c2_3, c2_4, c2_5,

@@ -10,5 +10,6 @@ public enum CourseType {
     CSCI,
     MUSC,
     WRIT,
+    DESI,
     OTHERS
 }

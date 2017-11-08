@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="cc.isotopestudio.courseplan.CoursePlanGUI">
-  <grid id="7ccfa" binding="mainPane" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="7ccfa" binding="mainPane" layout-manager="GridLayoutManager" row-count="8" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
-      <xy x="20" y="20" width="626" height="1010"/>
+      <xy x="20" y="20" width="466" height="1010"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -577,14 +577,6 @@
           <font name="DengXian" size="24"/>
           <text value="Label"/>
         </properties>
-      </component>
-      <component id="73f8d" class="javax.swing.JTree" binding="tree1" default-binding="true">
-        <constraints>
-          <grid row="0" column="1" row-span="8" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties/>
       </component>
     </children>
   </grid>

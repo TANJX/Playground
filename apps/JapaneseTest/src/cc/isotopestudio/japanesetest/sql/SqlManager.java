@@ -11,7 +11,7 @@ public class SqlManager {
     public static Statement statement;
 
     public static void init() {
-        SQLite db = new SQLite("C:\\OneDrive\\apps\\Mars' Collection\\Japanese\\", "data.db");
+        SQLite db = new SQLite("O:\\OneDrive\\apps\\Mars' Collection\\Japanese\\", "data.db");
 
         try {
             c = db.openConnection();

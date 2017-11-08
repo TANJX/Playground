@@ -25,10 +25,35 @@ public enum Course {
     COMM_ELECTIVE_5(4, CourseType.COMM),
     COMM_ELECTIVE_6(4, CourseType.COMM),
 
-    MUEN_300(2, CourseType.MUSC),
-    PIAN_301(6, CourseType.MUSC),
-    MUCO_130a(3, CourseType.MUSC),
-    MUCO_130b(3, CourseType.MUSC),
+//    MUEN_300(2, CourseType.MUSC),
+//    PIAN_301_1(1, CourseType.MUSC),
+//    PIAN_301_2(1, CourseType.MUSC),
+//    PIAN_301_3(1, CourseType.MUSC),
+//    PIAN_301_4(1, CourseType.MUSC),
+//    PIAN_301_5(1, CourseType.MUSC),
+//    PIAN_301_6(1, CourseType.MUSC),
+//    MUCO_130a(3, CourseType.MUSC),
+//    MUCO_130b(3, CourseType.MUSC),
+
+//    DESI_1a(4,CourseType.DESI),
+//    DESI_1b(4,CourseType.DESI),
+//    DESI_2a(4,CourseType.DESI),
+//    DESI_2b(4,CourseType.DESI),
+//    DESI_2c(4,CourseType.DESI),
+//    DESI_2d(4,CourseType.DESI),
+
+    MATH_226(4,CourseType.CSCI),
+    MATH_225(4,CourseType.CSCI),
+    MATH_407(4,CourseType.CSCI),
+    SCI_1(4,CourseType.CSCI),
+    SCI_2(4,CourseType.CSCI),
+    CSCI_270(4, CourseType.CSCI, "CSCI 201 or 270"),
+    CSCI_310(4, CourseType.CSCI, "CSCI 201 or 270"),
+    CSCI_350(4, CourseType.CSCI, "CSCI 201 or 270"),
+    CSCI_356(4, CourseType.CSCI, "CSCI 201 or 270"),
+    CSCI_401(4, CourseType.CSCI, "CSCI 201 or 270"),
+    EE_109(4, CourseType.CSCI, "CSCI 201 or 270"),
+    CSCI_ELECTIVE_4(2, CourseType.CSCI, "CSCI 201 or 270"),
 
     CSCI_103(4, CourseType.CSCI),
     CSCI_109(2, CourseType.CSCI),
@@ -38,6 +63,7 @@ public enum Course {
     CSCI_ELECTIVE_1(4, CourseType.CSCI),
     CSCI_ELECTIVE_2(4, CourseType.CSCI),
     CSCI_ELECTIVE_3(4, CourseType.CSCI),
+
     WRIT_150(4, CourseType.WRIT),
     WRIT_340(4, CourseType.WRIT);
 
