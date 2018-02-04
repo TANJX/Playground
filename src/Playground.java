@@ -3,28 +3,17 @@
  * Copyright ISOTOPE Studio
  */
 
-
-import io.properties.FileOperation;
-
 import java.io.*;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Playground {
 
     public static void main(String[] args) {
         // The name of the file to open.
-        String fileName = "O:\\OneDrive\\Coding\\Practice\\[2017.9.12]Mars Inc Webside\\site\\japanese\\course.txt";
+        String fileName = "C:\\Users\\david\\Desktop\\japanese\\Japanese2.htm";
 
         // This will reference one line at a time
         String line;
-
-        List<Integer> firstCourse = Arrays.asList(1, 19, 29, 41, 52, 61, 71, 80, 88, 97);
 
         try {
             // FileReader reads text files in the default encoding.
@@ -34,19 +23,88 @@ public class Playground {
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader =
                     new BufferedReader(fileReader);
-            int unit = -1;
-            int course = 0;
+            int count = 0;
+            String s1 = null, s2 = null, s3 = null;
+            String target = "<P style=\"MARGIN: 0in\">&nbsp;</P>";
+            StringBuilder sb = new StringBuilder();
             while ((line = bufferedReader.readLine()) != null) {
-                course++;
-                if (firstCourse.contains(course)) {
-                    unit++;
-                    if (unit != 0) System.out.println("</div>");
-                    System.out.println(
-                            "<div id=\"unit-" + unit + "\" class=\"btn-group second-btn\" role=\"group\" style=\"display: none\" aria-label=\"Units-" + unit + "\">");
+                if (s1 == null) {
+                    s1 = line;
+                    sb.append(line).append("\r\n");
+                    continue;
                 }
-                System.out.println("<button type=\"button\" class=\"btn btn-info\" onClick=\"window.location.href='#c" + (course) + "'\">" + line + "</button>");
-
+                if (s2 == null) {
+                    s2 = line;
+                    sb.append(line).append("\r\n");
+                    continue;
+                }
+                if (s3 == null) {
+                    s3 = line;
+                    sb.append(line).append("\r\n");
+                    continue;
+                }
+                if (s1.equals(target) && s2.equals(target) && s3.equals(target)) {
+                    count++;
+                    sb.append("<DIV id=\"c").append(count+1).append("\">\r\n");
+                } else sb.append(line).append("\r\n");
+                s1 = s2;
+                s2 = s3;
+                s3 = line;
             }
+            // Always close files.
+            bufferedReader.close();
+            io.fileOperation.Write.write(new File("C:\\Users\\david\\Desktop\\japanese\\Japanese.htm"), sb.toString());
+        } catch (FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" +
+                            fileName + "'");
+        } catch (IOException ex) {
+            System.out.println(
+                    "Error reading file '"
+                            + fileName + "'");
+            // Or we could just do this:
+            // ex.printStackTrace();
+        }
+    }
+
+    private static void f1() {
+        // The name of the file to open.
+        String fileName = "C:\\Users\\david\\Desktop\\japanese\\Japanese.htm";
+
+        // This will reference one line at a time
+        String line;
+
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader =
+                    new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+            Map<String, Integer> map = new HashMap<>();
+            while ((line = bufferedReader.readLine()) != null) {
+                if (!line.contains("style=")) continue;
+                ;
+                int i = line.indexOf("style=") + 7;
+                char c = 0;
+                try {
+                    c = line.charAt(i - 1);
+                } catch (Exception e) {
+                    System.out.println(line);
+                    e.printStackTrace();
+                }
+                StringBuilder s = new StringBuilder();
+                do {
+                    s.append(line.charAt(i++));
+                }
+                while (i < line.length() && line.charAt(i) != c);
+                String string = "style=" + c + s.toString() + c;
+                if (!map.containsKey(string)) {
+                    map.put(string, 1);
+                } else map.put(string, map.get(string) + 1);
+            }
+            printMap(sortByValue(map));
             // Always close files.
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
@@ -61,6 +119,44 @@ public class Playground {
             // ex.printStackTrace();
         }
     }
+
+    private static Map<String, Integer> sortByValue(Map<String, Integer> unsortMap) {
+
+        // 1. Convert Map to List of Map
+        List<Map.Entry<String, Integer>> list =
+                new LinkedList<>(unsortMap.entrySet());
+
+        // 2. Sort list with Collections.sort(), provide a custom Comparator
+        //    Try switch the o1 o2 position for a different order
+        Collections.sort(list, (o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
+
+        // 3. Loop the sorted list and put it into a new insertion order Map LinkedHashMap
+        Map<String, Integer> sortedMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> entry : list) {
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }
+
+        /*
+        //classic iterator example
+        for (Iterator<Map.Entry<String, Integer>> it = list.iterator(); it.hasNext(); ) {
+            Map.Entry<String, Integer> entry = it.next();
+            sortedMap.put(entry.getKey(), entry.getValue());
+        }*/
+
+
+        return sortedMap;
+    }
+
+    public static <K, V> void printMap(Map<K, V> map) {
+        int count = 0;
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            if (count++ >= 1000) return;
+            System.out.println(count + ": " + entry.getKey()
+                    + " [" + entry.getValue() + "]");
+        }
+    }
+
+
 }
 
 

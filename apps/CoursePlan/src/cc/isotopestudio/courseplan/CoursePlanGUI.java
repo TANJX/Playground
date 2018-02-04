@@ -33,6 +33,10 @@ public class CoursePlanGUI {
         comboboxLabelMap.put(cb6, creditLabel6);
         comboboxLabelMap.put(cb7, creditLabel7);
         comboboxLabelMap.put(cb8, creditLabel8);
+        comboboxLabelMap.put(cb9, creditLabel9);
+        comboboxLabelMap.put(cb10, creditLabel10);
+        comboboxLabelMap.put(cb11, creditLabel11);
+        comboboxLabelMap.put(cb12, creditLabel12);
         cb.forEach(jComboBox -> {
             jComboBox.addItem(" - ");
             remainCourses.forEach(jComboBox::addItem);
@@ -131,6 +135,30 @@ public class CoursePlanGUI {
     private JLabel creditLabel7;
     private JLabel creditLabel8;
     private JLabel remainCreditLabel;
+    private JPanel panel20182;
+    private JPanel panel20192;
+    private JPanel panel20202;
+    private JPanel panel20212;
+    private JLabel creditLabel9;
+    private JLabel creditLabel10;
+    private JLabel creditLabel11;
+    private JLabel creditLabel12;
+    private JComboBox c9_1;
+    private JComboBox c9_2;
+    private JComboBox c9_3;
+    private JComboBox c9_4;
+    private JComboBox c10_1;
+    private JComboBox c10_2;
+    private JComboBox c10_3;
+    private JComboBox c10_4;
+    private JComboBox c11_1;
+    private JComboBox c11_2;
+    private JComboBox c11_3;
+    private JComboBox c11_4;
+    private JComboBox c12_1;
+    private JComboBox c12_2;
+    private JComboBox c12_3;
+    private JComboBox c12_4;
 
     private final java.util.List<JComboBox> cb = Arrays.asList(c1_1, c1_2, c1_3, c1_4, c1_5,
             c2_1, c2_2, c2_3, c2_4, c2_5,
@@ -139,7 +167,11 @@ public class CoursePlanGUI {
             c5_1, c5_2, c5_3, c5_4, c5_5,
             c6_1, c6_2, c6_3, c6_4, c6_5,
             c7_1, c7_2, c7_3, c7_4, c7_5,
-            c8_1, c8_2, c8_3, c8_4, c8_5);
+            c8_1, c8_2, c8_3, c8_4, c8_5,
+            c9_1, c9_2, c9_3, c9_4,
+            c10_1, c10_2, c10_3, c10_4,
+            c11_1, c11_2, c11_3, c11_4,
+            c12_1, c12_2, c12_3, c12_4);
     private final java.util.List<JComboBox> cb1 = Arrays.asList(c1_1, c1_2, c1_3, c1_4, c1_5);
     private final java.util.List<JComboBox> cb2 = Arrays.asList(c2_1, c2_2, c2_3, c2_4, c2_5);
     private final java.util.List<JComboBox> cb3 = Arrays.asList(c3_1, c3_2, c3_3, c3_4, c3_5);
@@ -148,9 +180,14 @@ public class CoursePlanGUI {
     private final java.util.List<JComboBox> cb6 = Arrays.asList(c6_1, c6_2, c6_3, c6_4, c6_5);
     private final java.util.List<JComboBox> cb7 = Arrays.asList(c7_1, c7_2, c7_3, c7_4, c7_5);
     private final java.util.List<JComboBox> cb8 = Arrays.asList(c8_1, c8_2, c8_3, c8_4, c8_5);
+    private final java.util.List<JComboBox> cb9 = Arrays.asList(c9_1, c9_2, c9_3, c9_4);
+    private final java.util.List<JComboBox> cb10 = Arrays.asList(c10_1, c10_2, c10_3, c10_4);
+    private final java.util.List<JComboBox> cb11 = Arrays.asList(c11_1, c11_2, c11_3, c11_4);
+    private final java.util.List<JComboBox> cb12 = Arrays.asList(c12_1, c12_2, c12_3, c12_4);
     private final java.util.List<JLabel> labels = Arrays.asList(creditLabel1, creditLabel2, creditLabel3, creditLabel4,
-            creditLabel5, creditLabel6, creditLabel7, creditLabel8);
+            creditLabel5, creditLabel6, creditLabel7, creditLabel8,
+            creditLabel9, creditLabel10, creditLabel11, creditLabel12);
 
-    private final java.util.List<List<JComboBox>> cbs = Arrays.asList(cb1, cb2, cb3, cb4, cb5, cb6, cb7, cb8);
+    private final java.util.List<List<JComboBox>> cbs = Arrays.asList(cb1, cb2, cb3, cb4, cb5, cb6, cb7, cb8, cb9, cb10, cb11, cb12);
     private final Map<List<JComboBox>, JLabel> comboboxLabelMap = new HashMap<>();
 }
