@@ -155,33 +155,29 @@ public class VocabPlanGUI {
                     scrollPane.setViewportView(textArea);
 
                     JButton export = new JButton("Export to Excel Format...");
-                    export.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent arg0) {
-                            jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                    export.addActionListener(arg01 -> {
+                        jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                        try {
+                            jFileChooser.setCurrentDirectory(new File(getPath()));
+                        } catch (UnsupportedEncodingException e1) {
+                            e1.printStackTrace();
+                        }
+                        int returnVal = jFileChooser.showOpenDialog(listFrame);
+                        if (returnVal == JFileChooser.APPROVE_OPTION) {
+                            File file = jFileChooser.getSelectedFile();
+                            String filename = slist.getValue() + "-lists " + sy.getValue() + "-"
+                                    + sm.getValue() + "-" + sd.getValue() + ".csv";
+                            String f = file.getAbsolutePath() + "\\" + filename;
                             try {
-                                jFileChooser.setCurrentDirectory(new File(getPath()));
-                            } catch (UnsupportedEncodingException e1) {
-                                // TODO Auto-generated catch block
-                                e1.printStackTrace();
-                            }
-                            int returnVal = jFileChooser.showOpenDialog(listFrame);
-                            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                                File file = jFileChooser.getSelectedFile();
-                                String filename = (int) slist.getValue() + "-lists " + (int) sy.getValue() + "-"
-                                        + (int) sm.getValue() + "-" + (int) sd.getValue() + ".csv";
-                                String f = file.getAbsolutePath() + "\\" + filename;
-                                try {
-                                    write(new File(f), result((int) sy.getValue(), (int) sm.getValue(),
-                                            (int) sd.getValue(), (int) slist.getValue(), 1));
-                                    JOptionPane.showMessageDialog(listFrame,
-                                            "Success! \nFileName: " + filename + "\nPath: " + file.getAbsolutePath());
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                    JOptionPane.showMessageDialog(listFrame, "Error! ParseException");
-                                }
+                                write(new File(f), result((int) sy.getValue(), (int) sm.getValue(),
+                                        (int) sd.getValue(), (int) slist.getValue(), 1));
+                                JOptionPane.showMessageDialog(listFrame,
+                                        "Success! \nFileName: " + filename + "\nPath: " + file.getAbsolutePath());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                JOptionPane.showMessageDialog(listFrame, "Error! ParseException");
                             }
                         }
-
                     });
                     JPanel buttonPane = new JPanel();
                     buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

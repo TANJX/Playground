@@ -11,14 +11,10 @@ import java.util.List;
 
 public class CoursePlanGUI {
 
-    public static void main(String[] args) {
-        new CoursePlanGUI();
-    }
-
-    private CoursePlanGUI() {
+    CoursePlanGUI(List<Course> courses) {
+        remainCourses = new ArrayList<>(courses);
         JFrame frame = new JFrame("CoursePlanGUI");
         frame.setContentPane(mainPane);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setResizable(false);
         Toolkit toolkit = frame.getToolkit();
@@ -52,14 +48,14 @@ public class CoursePlanGUI {
                     comboboxLabelMap.get(semester).setText("Credit(s): " + semester.stream().mapToInt(jComboBox -> {
                         if (jComboBox.getSelectedItem() instanceof Course) {
                             assert jComboBox.getSelectedItem() != null;
-                            return ((Course) jComboBox.getSelectedItem()).credit;
+                            return ((Course) jComboBox.getSelectedItem()).getUnit();
                         } else {
                             return 0;
                         }
                     }).sum());
                 })
         ));
-        remainCreditLabel.setText("REMAINING CREDITS: " + remainCourses.stream().mapToInt(course -> course.credit).sum());
+        remainCreditLabel.setText("REMAINING CREDITS: " + remainCourses.stream().mapToInt(course -> course.getUnit()).sum());
     }
 
     private void update(JComboBox box, Course course) {
@@ -73,10 +69,10 @@ public class CoursePlanGUI {
             selctionMap.put(box, course);
             remainCourses.remove(course);
         }
-        remainCreditLabel.setText("REMAINING CREDITS: " + remainCourses.stream().mapToInt(single -> single.credit).sum());
+        remainCreditLabel.setText("REMAINING CREDITS: " + remainCourses.stream().mapToInt(Course::getUnit).sum());
     }
 
-    private java.util.List<Course> remainCourses = new ArrayList<>(Arrays.asList(Course.values()));
+    private java.util.List<Course> remainCourses;
     private Map<JComboBox, Course> selctionMap = new HashMap<>();
 
     private JPanel panel20173;

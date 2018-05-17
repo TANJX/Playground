@@ -19,6 +19,8 @@ public class MainGUI {
     private JCheckBox RANDOMCheckBox;
     private JRadioButton spaceRadioButton;
     private JRadioButton characterRadioButton;
+    private JTextField prefixText;
+    private JTextField suffixText;
     private JScrollPane outputPane;
     private JScrollPane intputPane;
 
@@ -61,11 +63,11 @@ public class MainGUI {
         frame.setVisible(true);
     }
 
-    private static String getCharacter(String s) {
+    private String getCharacter(String s) {
         StringBuilder sb = new StringBuilder();
         for (char c : s.toCharArray()) {
             if (c != '\n' && c != '\r')
-                sb.append(c).append("\n");
+                sb.append(prefixText.getText()).append(c).append(suffixText.getText()).append("\n");
         }
         return sb.toString().replaceAll("\u0016", "");
     }
