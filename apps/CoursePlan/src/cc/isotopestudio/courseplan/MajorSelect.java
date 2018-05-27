@@ -17,6 +17,7 @@ public class MajorSelect {
     private JComboBox major1Select;
     private JComboBox major2Select;
     private JButton doneButton;
+    private JComboBox major3Select;
 
 
     public MajorSelect() {
@@ -27,6 +28,7 @@ public class MajorSelect {
         frame.setVisible(true);
         major1Select.addItem(" - ");
         major2Select.addItem(" - ");
+        major3Select.addItem(" - ");
         Set<String> majors = new HashSet<>(CourseReader.majors.keySet());
         Set<String> remainMajors = new HashSet<>(CourseReader.majors.keySet());
         majors.remove("ge");
@@ -34,6 +36,7 @@ public class MajorSelect {
         for (String major : majors) {
             major1Select.addItem(major);
             major2Select.addItem(major);
+            major3Select.addItem(major);
         }
         major1Select.addActionListener(e -> {
             if (!major1Select.getSelectedItem().equals(" - ")) {
@@ -54,6 +57,8 @@ public class MajorSelect {
                 courses.addAll(CourseReader.majors.get(major1Select.getSelectedItem().toString()));
             if (!major2Select.getSelectedItem().equals(" - "))
                 courses.addAll(CourseReader.majors.get(major2Select.getSelectedItem().toString()));
+            if (!major3Select.getSelectedItem().equals(" - "))
+                courses.addAll(CourseReader.majors.get(major3Select.getSelectedItem().toString()));
             new CoursePlanGUI(courses);
         });
     }

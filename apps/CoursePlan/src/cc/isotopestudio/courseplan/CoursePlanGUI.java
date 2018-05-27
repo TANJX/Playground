@@ -155,11 +155,13 @@ public class CoursePlanGUI {
     private JComboBox c12_2;
     private JComboBox c12_3;
     private JComboBox c12_4;
+    private JComboBox c3_6;
+    private JComboBox c4_6;
 
     private final java.util.List<JComboBox> cb = Arrays.asList(c1_1, c1_2, c1_3, c1_4, c1_5,
             c2_1, c2_2, c2_3, c2_4, c2_5,
-            c3_1, c3_2, c3_3, c3_4, c3_5,
-            c4_1, c4_2, c4_3, c4_4, c4_5,
+            c3_1, c3_2, c3_3, c3_4, c3_5, c3_6,
+            c4_1, c4_2, c4_3, c4_4, c4_5, c4_6,
             c5_1, c5_2, c5_3, c5_4, c5_5,
             c6_1, c6_2, c6_3, c6_4, c6_5,
             c7_1, c7_2, c7_3, c7_4, c7_5,
@@ -170,8 +172,8 @@ public class CoursePlanGUI {
             c12_1, c12_2, c12_3, c12_4);
     private final java.util.List<JComboBox> cb1 = Arrays.asList(c1_1, c1_2, c1_3, c1_4, c1_5);
     private final java.util.List<JComboBox> cb2 = Arrays.asList(c2_1, c2_2, c2_3, c2_4, c2_5);
-    private final java.util.List<JComboBox> cb3 = Arrays.asList(c3_1, c3_2, c3_3, c3_4, c3_5);
-    private final java.util.List<JComboBox> cb4 = Arrays.asList(c4_1, c4_2, c4_3, c4_4, c4_5);
+    private final java.util.List<JComboBox> cb3 = Arrays.asList(c3_1, c3_2, c3_3, c3_4, c3_5, c3_6);
+    private final java.util.List<JComboBox> cb4 = Arrays.asList(c4_1, c4_2, c4_3, c4_4, c4_5, c4_6);
     private final java.util.List<JComboBox> cb5 = Arrays.asList(c5_1, c5_2, c5_3, c5_4, c5_5);
     private final java.util.List<JComboBox> cb6 = Arrays.asList(c6_1, c6_2, c6_3, c6_4, c6_5);
     private final java.util.List<JComboBox> cb7 = Arrays.asList(c7_1, c7_2, c7_3, c7_4, c7_5);
