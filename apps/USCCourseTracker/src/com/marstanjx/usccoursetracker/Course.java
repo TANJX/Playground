@@ -10,13 +10,8 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.marstanjx.usccoursetracker.CoursePreview.paint;
-import static com.marstanjx.usccoursetracker.CourseTrackerGUI.mainPane;
-
 public class Course {
-
-    public static java.util.List<Course> courseList = new ArrayList<>();
-
+    SemesterGUI semesterGUI;
     private final String id;
     private final String department;
     private final String name;
@@ -26,7 +21,7 @@ public class Course {
     private final String end;
     private int registered;
     private int available;
-    public final JPanel coursePane = new JPanel();
+    private final JPanel coursePane = new JPanel();
     private JLabel r;
     private JLabel a;
     private JLabel status;
@@ -35,7 +30,8 @@ public class Course {
 
     private static final FlowLayout experimentLayout = new FlowLayout();
 
-    public Course(String id, String department, String name, String instructor, String days, String start, String end, int registered, int available) {
+    public Course(SemesterGUI semesterGUI, String id, String department, String name, String instructor, String days, String start, String end, int registered, int available) {
+        this.semesterGUI = semesterGUI;
         this.id = id;
         this.department = department;
         this.name = name;
@@ -81,18 +77,18 @@ public class Course {
         select = new JCheckBox();
         select.addActionListener(e -> {
             markConflict();
-            if(!select.isSelected()) {
+            if (!select.isSelected()) {
                 status.setText("");
             }
-            paint();
+            semesterGUI.coursePreview.paint();
         });
         coursePane.add(select);
 
         update();
 
-        courseList.add(this);
+        semesterGUI.courseList.add(this);
 
-        mainPane.add(coursePane);
+        semesterGUI.courseTrackerGUI.mainPane.add(coursePane);
     }
 
     public String getId() {
@@ -137,7 +133,7 @@ public class Course {
                 infoLabel.setText(infoLabel.getText().replaceFirst("gray", "green"));
             }
         }
-        mainPane.updateUI();
+        semesterGUI.courseTrackerGUI.mainPane.updateUI();
     }
 
     public int getAvailable() {
@@ -160,22 +156,23 @@ public class Course {
         }
     }
 
-    public static Course get(String id) {
-        Optional<Course> first = courseList.stream().filter(course -> course.id.equals(id)).findFirst();
+    public static Course get(SemesterGUI s, String id) {
+        Optional<Course> first = s.courseList.stream().filter(course -> course.id.equals(id)).findFirst();
         return first.orElse(null);
     }
 
-    public static boolean markConflict() {
+    public boolean markConflict() {
         int i = 0;
         boolean con = false;
-        List<Course> selectedCourses = courseList.stream().filter(course -> course.select.isSelected()).collect(Collectors.toList());
+        List<Course> selectedCourses = semesterGUI.courseList.stream().filter(course -> course.select.isSelected()).collect(Collectors.toList());
         Set<Course> confliced = new HashSet<>();
         for (Course c1 : selectedCourses) {
-            if(confliced.contains(c1)) continue;
+            if (confliced.contains(c1)) continue;
             boolean cc = false;
             loop:
             for (int j = i + 1; j < selectedCourses.size(); j++) {
                 Course c2 = selectedCourses.get(j);
+                if (c1 == c2) continue;
                 for (char d : c1.days.toCharArray()) {
                     if (c2.days.contains(d + "")) {
                         String[] split = c1.start.split(":");
@@ -193,7 +190,7 @@ public class Course {
                             confliced.add(c2);
                             c1.status.setText("<html><font color='red'>CON</font></html>");
                             c2.status.setText("<html><font color='red'>CON</font></html>");
-                            break loop;
+//                            break loop;
                         }
                     }
                 }

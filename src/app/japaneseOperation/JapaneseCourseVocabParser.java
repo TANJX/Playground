@@ -34,16 +34,24 @@ public class JapaneseCourseVocabParser extends JFrame {
                     int i1 = line.indexOf("£¨");
                     int i2 = line.indexOf("£©");
                     int i3 = line.indexOf("[");
+                    if (i3 < 0)
+                        for (int i = line.length() - 1; i > 0; i--) {
+                            if (line.charAt(i) == '¡¡') {
+                                i3 = i + 1;
+                                break;
+                            }
+                        }
+                    if (i3 <= 0) return;
                     out = line.substring(i1 + 1, i2) + "/"
-                            + line.substring(0, i1) + "/"+
+                            + line.substring(0, i1) + "/" +
                             line.substring(i3);
                 } catch (Exception e1) {
                     return;
                 }
-                paste.setText(out);
+                paste.setText(out + "/");
             }
         });
-        setSize(500,170);
+        setSize(500, 170);
         setVisible(true);
     }
 

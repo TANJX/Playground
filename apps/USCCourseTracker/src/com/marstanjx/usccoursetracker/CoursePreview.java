@@ -11,8 +11,8 @@ import javax.swing.*;
 
 public class CoursePreview extends JPanel {
 
-    private int marginX = 125;
-    private int marginY = 20;
+    private static final int marginX = 125;
+    private static final int marginY = 20;
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -26,7 +26,7 @@ public class CoursePreview extends JPanel {
             g.drawString((8 + i) + ":00", marginX / 2, marginY + 60 * i + 5);
             g.drawRect(marginX, i * 60 + marginY, 150 * 5, 0);
         }
-        List<Course> courses = Course.courseList.stream().filter(course -> course.select.isSelected()).collect(Collectors.toList());
+        List<Course> courses = semesterGUI.courseList.stream().filter(course -> course.select.isSelected()).collect(Collectors.toList());
         for (Course c : courses) {
             String[] split = c.getStart().split(":");
             int shour = Integer.parseInt(split[0]);
@@ -67,8 +67,14 @@ public class CoursePreview extends JPanel {
                     case ("WRIT"):
                         g.setColor(new Color(203, 200, 43));
                         break;
+                    case ("ACAD"):
+                        g.setColor(new Color(203, 163, 77));
+                        break;
+                    case ("MUCO"):
+                        g.setColor(new Color(46, 203, 76));
+                        break;
                     default:
-                        g.setColor(new Color(0, 0, 0));
+                        g.setColor(new Color(67, 175, 203));
                         break;
                 }
                 for (int i = 0; i < length; i++) {
@@ -85,21 +91,21 @@ public class CoursePreview extends JPanel {
         return new Dimension(1000, 700);
     }
 
-    private static JFrame frame;
+    private JFrame frame;
+    private SemesterGUI semesterGUI;
 
-    // create the GUI explicitly on the Swing event thread
-    public static void init() {
-        CoursePreview mainPanel = new CoursePreview();
-        frame = new JFrame("Course Preview(tm)");
+    CoursePreview(String term, SemesterGUI semesterGUI) {
+        frame = new JFrame("Course Preview(tm) (" + term + ")");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
+        frame.getContentPane().add(this);
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setResizable(false);
         frame.setVisible(true);
+        this.semesterGUI = semesterGUI;
     }
 
-    public static void paint() {
+    void paint() {
         frame.repaint();
     }
 

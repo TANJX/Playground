@@ -9,8 +9,8 @@ import java.awt.*;
 
 class CourseTrackerGUI extends JFrame {
 
-    CourseTrackerGUI(String name) {
-        super(name);
+    CourseTrackerGUI(String term, SemesterGUI semesterGUI) {
+        super("Course Tracker (" + term + ")");
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (Exception ex) {
@@ -27,7 +27,8 @@ class CourseTrackerGUI extends JFrame {
         setVisible(true);
     }
 
-    static JPanel mainPane;
+    JPanel mainPane;
+    JTextArea courseinput;
 
     private void addComponentsToPane(final Container pane) {
         mainPane = new JPanel();
@@ -37,6 +38,9 @@ class CourseTrackerGUI extends JFrame {
         mainPane.add(new JLabel("Tracker"));
         mainPane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         pane.add(mainPane, BorderLayout.CENTER);
+        courseinput = new JTextArea();
+        courseinput.setSize(650,200);
+        mainPane.add(courseinput);
     }
 
 }

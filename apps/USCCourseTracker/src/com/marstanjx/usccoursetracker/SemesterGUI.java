@@ -12,12 +12,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class ParseJson {
+class SemesterGUI {
 
-    private static void newCourse(JSONObject course, JSONObject section) {
+    private final String term;
+    final CourseTrackerGUI courseTrackerGUI;
+    final CoursePreview coursePreview;
+    final List<Course> courseList = new ArrayList<>();
+
+    SemesterGUI(String term) {
+        this.term = term;
+        courseTrackerGUI = new CourseTrackerGUI(term, this);
+        coursePreview = new CoursePreview(term, this);
+    }
+
+    private void newCourse(JSONObject course, JSONObject section) {
         int available = section.getInt("spaces_available");
         int registered = section.getInt("number_registered");
         String s = section.getString("start_time");
@@ -33,24 +45,42 @@ class ParseJson {
                         + section.getJSONArray("instructor").getJSONObject(0).getString("last_name");
             }
         String courseID = course.getString("PublishedCourseID");
-        new Course(section.getString("id"), course.getJSONObject("CourseData").getString("prefix"), courseID, instructor, d, s, e, registered, available);
+        new Course(this, section.getString("id"), course.getJSONObject("CourseData").getString("prefix"),
+                courseID, instructor, d, s, e, registered, available);
     }
 
-    static void updateCourses() {
-        List<String> courses = ReadFile.getCourse();
-        List<String> deparments = Arrays.asList("ASCJ", "COMM", "CSCI", "WRIT");
+    void updateCourses() {
+        List<String> courses = Arrays.asList(courseTrackerGUI.courseinput.getText().split("\\r?\\n"));
+//        List<String> courses = new ArrayList<>();
+
+        List<String> deparments = Arrays.asList("ACAD", "PHIL", "CSCI");
         for (String deparment : deparments) {
             try {
-                JSONObject obj = new JSONObject(readUrlContent("http://web-app.usc.edu/web/soc/api/classes/" + deparment + "/20181", 2000));
+                String jsontext = readUrlContent("https://web-app.usc.edu/web/soc/api/classes/" + deparment + "/" + term, 2000);
+                JSONObject obj = new JSONObject(jsontext);
                 JSONArray arr = obj.getJSONObject("OfferedCourses").getJSONArray("course");
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject course = arr.getJSONObject(i);
+                    String courseIDName = course.getString("PublishedCourseID");
+                    boolean all = false;
+                    if (courses.stream().filter(s -> !s.matches("^\\d*")).anyMatch(s -> {
+                        String[] split = s.split(" ");
+                        if (split.length >= 2) {
+                            if (courseIDName.contains(split[0]) && courseIDName.contains(split[1])) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    })) {
+                        all = true;
+                    }
+
                     if (course.getJSONObject("CourseData").get("SectionData") instanceof JSONArray) {
                         JSONArray sections = course.getJSONObject("CourseData").getJSONArray("SectionData");
                         for (int i1 = 0; i1 < sections.length(); i1++) {
                             JSONObject section = sections.getJSONObject(i1);
-                            if (courses.contains(section.getString("id"))) {
-                                Course courseObj = Course.get(section.getString("id"));
+                            if (all || courses.contains(section.getString("id"))) {
+                                Course courseObj = Course.get(this, section.getString("id"));
                                 if (courseObj == null)
                                     newCourse(course, section);
                                 else {
@@ -63,8 +93,8 @@ class ParseJson {
                         }
                     } else if (course.getJSONObject("CourseData").get("SectionData") instanceof JSONObject) {
                         JSONObject section = course.getJSONObject("CourseData").getJSONObject("SectionData");
-                        if (courses.contains(section.getString("id"))) {
-                            Course courseObj = Course.get(section.getString("id"));
+                        if (all || courses.contains(section.getString("id"))) {
+                            Course courseObj = Course.get(this, section.getString("id"));
                             if (courseObj == null)
                                 newCourse(course, section);
                             else {
@@ -80,10 +110,10 @@ class ParseJson {
                 e.printStackTrace();
             }
         }
-        System.out.println(Course.courseList);
+        System.out.println(courseList);
     }
 
-    private static String readUrlContent(String address, int timeout) throws IOException {
+    private String readUrlContent(String address, int timeout) throws IOException {
         StringBuilder contents = new StringBuilder(2048);
         BufferedReader br = null;
 

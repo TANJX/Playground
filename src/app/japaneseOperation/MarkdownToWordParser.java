@@ -77,11 +77,11 @@ public class MarkdownToWordParser {
                             sb.add(sub.toString());
                             if (end) break;
                         } else {
-                            if (line.contains("!")) {
+                            while (line.contains("!")) {
                                 line = line.replaceFirst("!", "<span style=\"color: orange\">")
                                         .replaceFirst("!", "</span>");
                             }
-                            if (line.contains("**")) {
+                            while (line.contains("**")) {
                                 line = line.replaceFirst("\\*\\*", "<b>")
                                         .replaceFirst("\\*\\*", "</b>");
                             }
@@ -94,11 +94,16 @@ public class MarkdownToWordParser {
                             if (line.startsWith("$")) {
                                 line = "<span style=\"background-color: lightgreen;\">" + line.substring(1) + "</span>";
                             }
+                            if (line.startsWith("&&")) {
+                                line = line.substring(2);
+                            } else if (line.startsWith("&")) {
+                                line = line.substring(1);
+                            }
                             info.add(line);
                         }
                     if ((line = br.readLine()) == null) {
                         end = true;
-                    } else if (line.contains("## ")) {
+                    } else if (line.contains("##")) {
                         end = true;
                     }
                 }
