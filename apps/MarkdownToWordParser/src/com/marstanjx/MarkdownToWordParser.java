@@ -1,10 +1,11 @@
-package app.japaneseOperation;
+package com.marstanjx;
 /*
  * Created by david on 2/8/2018.
  * Copyright ISOTOPE Studio
  */
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,9 +13,8 @@ import java.util.stream.Collectors;
 
 public class MarkdownToWordParser {
     public static void main(String[] args) {
-        String noteFolderPath = "C:\\Users\\david\\Desktop\\notes\\";
-        String outputFolder = "C:\\Users\\david\\Desktop\\output\\";
-        File noteFolder = new File(noteFolderPath);
+        File noteFolder = new File("notes/");
+        File outputFolder = new File("output/");
         File[] notesFiles = noteFolder.listFiles();
         assert notesFiles != null;
         for (File file : notesFiles) {
@@ -56,6 +56,7 @@ public class MarkdownToWordParser {
                                 e.printStackTrace();
                                 return;
                             }
+                            // if second field is Meaning, add empty field
                             if (parts.get(1).matches("\\[.*].*")) {
                                 parts.add(1, "");
                             }
@@ -109,7 +110,8 @@ public class MarkdownToWordParser {
                 }
                 br.close();
                 sb.remove(0);
-                write(sb.stream().collect(Collectors.joining("\r\n")), outputFolder + file.getName().replace(".md", ".txt"));
+                write(sb.stream().collect(Collectors.joining("\r\n")), outputFolder.getAbsolutePath() + "\\"
+                        + file.getName().replace(".md", ".txt"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
