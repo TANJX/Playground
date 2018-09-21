@@ -42,6 +42,15 @@ public class JapaneseCourseVocabParser extends JFrame {
             'ラ', 'リ', 'ル', 'レ', 'ロ',
             'ワ', 'ヲ',
 
+            'ざ','じ','ず','ぜ','ぞ',
+            'が','ぎ','ぐ','げ','ご',
+            'ば','び','ぶ','べ','ぼ',
+            'ぱ','ぴ','ぷ','ぺ','ぽ',
+            'ザ','ジ','ズ','ゼ','ゾ',
+            'ガ','ギ','グ','ゲ','ゴ',
+            'バ','ビ','ブ','ボ',
+            'パ','ピ','プ','ポ',
+
             'ゃ', 'ゅ', 'ょ',
             'ャ', 'ュ', 'ョ', 'ー', 'っ'
 
@@ -51,7 +60,7 @@ public class JapaneseCourseVocabParser extends JFrame {
     private JTextField paste = new JTextField();
 
     private JapaneseCourseVocabParser() {
-        super("Japanese Vocab 1.2");
+        super("Japanese Vocab 1.2.2");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Set up the content pane.
