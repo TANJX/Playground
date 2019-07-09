@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class OpenImage {
 
-    static void saveImageOnline(String url_str, String path) {
+    public static void saveImageOnline(String url_str, String path) {
         Image image = null;
         try {
             URL url = new URL(url_str);
